@@ -1224,7 +1224,7 @@ img[src*="teleskop-318"] {
 }
 
 img[src*="sphaeren-alt2"] {
-  object-position: center 95%;
+  object-position: center bottom;
 }
 
 .showcase-item img {
@@ -1233,6 +1233,15 @@ img[src*="sphaeren-alt2"] {
 
 .showcase-item img.slide-out {
   opacity: 0;
+}
+
+.showcase-item img.slide-in {
+  animation: slide-zoom 12s ease-out forwards;
+}
+
+@keyframes slide-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.04); }
 }
 
 /* ========== ENTRANCE ANIMATIONS ========== */
@@ -2543,6 +2552,11 @@ document.addEventListener('keydown', function(e) {
 
 /* ========== SHOWCASE SLIDESHOW ========== */
 (function() {
+  // Add initial movement to all showcase images
+  document.querySelectorAll('.showcase-item img').forEach(function(img) {
+    img.classList.add('slide-in');
+  });
+
   var items = document.querySelectorAll('.showcase-item[data-slides]');
   items.forEach(function(item, i) {
     var slides = item.dataset.slides.split(',');
@@ -2564,11 +2578,13 @@ document.addEventListener('keydown', function(e) {
         preload.src = slides[nextIdx];
         preload.onload = function() {
           img.classList.add('slide-out');
+          img.classList.remove('slide-in');
           setTimeout(function() {
             idx = nextIdx;
             img.src = slides[idx];
             setTimeout(function() {
               img.classList.remove('slide-out');
+              img.classList.add('slide-in');
             }, 50);
           }, 1500);
         };

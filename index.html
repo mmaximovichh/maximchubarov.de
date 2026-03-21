@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maxim M. Chubarov — Konzeptkunst · Multimedia · Creative Production</title>
+<meta name="description" content="Konzeptkünstler, Creative Producer und Kurator aus Leipzig. Arbeiten an der Schnittstelle von Kunst, Gemeinschaft und Technologie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Instrument+Sans:wght@400;500;600;700&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f5f0e8;
+  --text: #1a1a1a;
+  --muted: #6b6560;
+  --dim: #d4cfc7;
+  --accent-gold: #c4883a;
+  --content-max: 1200px;
+  --side-pad: clamp(1.5rem, 5vw, 4rem);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Film grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+.wrap {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--side-pad);
+}
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  color: white;
+  padding: 4rem 2rem;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 130%;
+  object-fit: cover;
+  transform: translateY(-15%);
+  will-change: transform;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.hero-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  line-height: 1.05;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+  color: white;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: hero-enter 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+@keyframes hero-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: clamp(0.85rem, 2vw, 1.15rem);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-top: 1.2rem;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: hero-enter 1s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
+}
+
+.hero-quote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  color: rgba(255,255,255,0.75);
+  max-width: 620px;
+  margin-top: 3rem;
+  line-height: 1.7;
+  font-variation-settings: 'SOFT' 80, 'WONK' 0;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: hero-enter 1s cubic-bezier(0.22, 1, 0.36, 1) 1.3s forwards;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  opacity: 0;
+  animation: hero-enter 0.8s ease 2s forwards;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero-scroll span {
+  display: block;
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.5);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* ========== FLOATING WORDS ========== */
+.floating-words {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-word {
+  position: absolute;
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+  color: rgba(255,255,255,0.15);
+}
+
+/* ========== SHOWCASE ========== */
+.showcase-item {
+  position: relative;
+  height: 70vh;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.showcase-item img {
+  width: 100%;
+  height: 140%;
+  object-fit: cover;
+  transition: transform 8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  margin-top: -20%;
+}
+
+.showcase-item:hover img {
+  transform: scale(1.03);
+}
+
+.showcase-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 40%, rgba(0,0,0,0.6));
+  pointer-events: none;
+}
+
+.showcase-info {
+  position: absolute;
+  bottom: 3rem;
+  left: var(--side-pad);
+  z-index: 2;
+  color: white;
+}
+
+.showcase-info h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  font-variation-settings: 'SOFT' 30;
+  margin-bottom: 0.4rem;
+}
+
+.showcase-info .showcase-meta {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* ========== LIGHT PARTICLES ========== */
+.particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: var(--size, 4px);
+  height: var(--size, 4px);
+  background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 70%);
+  border-radius: 50%;
+  animation: float-up var(--duration, 12s) linear infinite;
+  opacity: 0;
+}
+@keyframes float-up {
+  0% { opacity: 0; transform: translateY(100vh) translateX(0); }
+  10% { opacity: var(--peak-opacity, 0.6); }
+  90% { opacity: var(--peak-opacity, 0.6); }
+  100% { opacity: 0; transform: translateY(-10vh) translateX(var(--drift, 30px)); }
+}
+
+/* ========== GLOBAL FLOATING BEGRIFFE ========== */
+.global-words {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.global-word {
+  position: absolute;
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+}
+
+/* ========== SCATTERED WORDS ========== */
+.scattered-word {
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.25;
+  position: absolute;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 1;
+  animation: scatter-drift var(--drift-dur, 18s) ease-in-out infinite alternate;
+  animation-delay: var(--drift-delay, 0s);
+}
+
+.scattered-word:nth-child(1) { --drift-dur: 22s; --drift-delay: 0s; animation-name: scatter-drift-a; }
+.scattered-word:nth-child(2) { --drift-dur: 26s; --drift-delay: -4s; animation-name: scatter-drift-b; }
+.scattered-word:nth-child(3) { --drift-dur: 20s; --drift-delay: -8s; animation-name: scatter-drift-c; }
+
+@keyframes scatter-drift-a {
+  0% { transform: translate(0, 0); opacity: 0.2; }
+  50% { opacity: 0.35; }
+  100% { transform: translate(15px, -10px); opacity: 0.2; }
+}
+@keyframes scatter-drift-b {
+  0% { transform: translate(0, 0); opacity: 0.18; }
+  50% { opacity: 0.32; }
+  100% { transform: translate(-12px, 8px); opacity: 0.18; }
+}
+@keyframes scatter-drift-c {
+  0% { transform: translate(0, 0); opacity: 0.22; }
+  50% { opacity: 0.38; }
+  100% { transform: translate(10px, 12px); opacity: 0.22; }
+}
+.showcase-item { position: relative; }
+
+.showcase-words {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.showcase-words .scattered-word {
+  color: rgba(255,255,255,0.35);
+  font-size: 0.85rem;
+}
+
+/* ========== ACCORDION ========== */
+.accordion {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 2rem var(--side-pad) 0;
+}
+
+.accordion-section {
+  border-top: 1px solid var(--dim);
+}
+
+.accordion-section:last-child {
+  border-bottom: 1px solid var(--dim);
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0.5rem;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s;
+}
+
+.accordion-header:hover {
+  background: rgba(0,0,0,0.03);
+}
+
+.accordion-num {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  line-height: 1;
+  min-width: 2.5rem;
+  font-variation-settings: 'SOFT' 50;
+}
+
+.accordion-title {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  flex: 1;
+}
+
+.accordion-toggle {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.accordion-section.open .accordion-toggle {
+  transform: rotate(45deg);
+}
+
+.accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.accordion-section.open .accordion-body {
+  grid-template-rows: 1fr;
+}
+
+.accordion-inner {
+  overflow: hidden;
+}
+
+.accordion-content {
+  padding: 1rem 0 3rem;
+}
+
+/* ========== BIO ========== */
+.bio-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.bio-portrait {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+}
+
+.bio-portrait img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.bio-text p {
+  margin-bottom: 1.2rem;
+  font-size: 1.05rem;
+}
+
+.bio-text .quote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--accent-gold);
+  border-left: 3px solid var(--accent-gold);
+  padding-left: 1.2rem;
+  margin-top: 1.5rem;
+  font-variation-settings: 'SOFT' 80;
+}
+
+/* ========== PROJECTS (in accordion) ========== */
+.project-card {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 2.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--dim);
+  align-items: center;
+  cursor: pointer;
+}
+
+.project-card:last-child { border-bottom: none; }
+
+.project-card.compact {
+  grid-template-columns: 1fr 3fr;
+}
+
+.project-img-wrap {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  position: relative;
+}
+
+.project-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 16/10;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-card:hover .project-img-wrap img {
+  transform: scale(1.03);
+}
+
+.project-info h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  font-variation-settings: 'SOFT' 30;
+}
+
+.project-meta {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+
+.project-desc {
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: gap 0.3s;
+  color: var(--accent-gold);
+}
+
+.project-link:hover { gap: 0.8rem; }
+.project-link::after { content: '\2192'; transition: transform 0.3s; }
+
+/* Weitere Projekte (text-only rows) */
+.weitere-list { list-style: none; }
+
+.weitere-item {
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--dim);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.weitere-item:last-child { border-bottom: none; }
+
+.weitere-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-variation-settings: 'SOFT' 30;
+}
+
+.weitere-role {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.weitere-desc {
+  grid-column: 1 / -1;
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.weitere-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.projects-divider {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--dim);
+}
+
+/* ========== WERT TIMELINE ========== */
+.wert-intro {
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+}
+
+.wert-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.wert-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: var(--accent-gold);
+  border-radius: 2px;
+}
+
+.wert-year {
+  padding: 0.8rem 0;
+  position: relative;
+}
+
+.wert-year::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 1.15rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-gold);
+  background: var(--bg);
+  transform: translateX(-4px);
+}
+
+.wert-year strong {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.wert-year span {
+  display: block;
+  color: var(--muted);
+  margin-top: 0.15rem;
+  font-size: 0.95rem;
+}
+
+.wert-quote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--accent-gold);
+  margin-top: 2rem;
+  font-size: 1.05rem;
+  font-variation-settings: 'SOFT' 80;
+}
+
+.wert-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+  color: var(--accent-gold);
+}
+
+.wert-link::after { content: '\2192'; }
+
+/* ========== FILM & VIDEO ========== */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.video-card {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+.video-card:hover { transform: translateY(-4px); }
+
+.video-thumb {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: var(--dim);
+}
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+.video-card:hover .video-thumb img { transform: scale(1.05); }
+
+.video-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  background: rgba(0,0,0,0.2);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.video-card:hover .video-play { opacity: 1; }
+
+.video-info { margin-top: 0.6rem; }
+.video-title {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.video-meta {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.film-subsection-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  font-variation-settings: 'SOFT' 30;
+}
+
+.film-subsection-title + .video-grid {
+  margin-bottom: 1.5rem;
+}
+
+.film-text-list {
+  list-style: none;
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.film-text-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--dim);
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.film-text-list li:last-child { border-bottom: none; }
+
+/* ========== MODAL ========== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  padding: 2rem;
+}
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal-content {
+  background: var(--bg);
+  border-radius: 12px;
+  max-width: 95vw;
+  width: 100%;
+  max-height: 95vh;
+  overflow-y: auto;
+  padding: 2.5rem;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+}
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+.modal-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--muted);
+  background: var(--bg);
+  border: none;
+  font-family: inherit;
+  transition: color 0.2s;
+  z-index: 10;
+  padding: 0.5rem;
+  margin: -0.5rem -0.5rem 0 0;
+}
+.modal-close:hover { color: var(--text); }
+.modal-img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+.teleskop-thumb-wrap {
+  position: relative;
+}
+.teleskop-expanded {
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+.teleskop-expanded.open {
+  max-height: 600px;
+  opacity: 1;
+}
+.teleskop-thumb.active {
+  opacity: 1 !important;
+}
+.modal-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.modal-meta {
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.2rem;
+}
+.modal-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.modal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+}
+.modal-link::after { content: '\2192'; }
+.modal-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+.modal-iframe-wrap {
+  width: 1400px;
+  height: 900px;
+  transform: scale(var(--iframe-scale, 0.6));
+  transform-origin: top left;
+  margin-bottom: calc(-900px * (1 - var(--iframe-scale, 0.6)));
+}
+.modal-iframe {
+  width: 1400px;
+  height: 900px;
+  border-radius: 8px;
+  border: 1px solid var(--dim);
+}
+
+/* ========== CONTACT SECTION ========== */
+.contact-section {
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.contact-email {
+  font-family: 'Fraunces', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s;
+}
+
+.contact-email:hover {
+  color: var(--accent-gold);
+}
+
+.contact-phone {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 1.1rem;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 2.5rem;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.contact-link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border: 1.5px solid var(--dim);
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  background: transparent;
+}
+
+.contact-link-pill:hover {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.contact-sites {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.contact-sites a {
+  color: var(--muted);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.contact-sites a:hover {
+  color: var(--accent-gold);
+}
+
+/* ========== TERMINE ========== */
+.termine-section {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 4rem var(--side-pad) 2rem;
+}
+
+.termine-heading {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 2rem;
+  color: var(--text);
+}
+
+.termin-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--dim);
+}
+
+.termin-item:first-of-type {
+  border-top: 1px solid var(--dim);
+}
+
+.termin-date {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  color: var(--accent-gold);
+  font-variation-settings: 'SOFT' 50;
+}
+
+.termin-info h4 {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.termin-info span {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.termin-location {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ========== PRESSE ========== */
+.presse-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.presse-img-wrap {
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 3/2;
+  background: var(--dim);
+  cursor: pointer;
+}
+
+.presse-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.presse-img-wrap:hover img {
+  transform: scale(1.04);
+}
+
+.presse-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--accent-gold);
+  margin-top: 1.5rem;
+}
+
+.presse-download::after { content: '\2193'; }
+
+.presse-text {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ========== CONTACT FORM ========== */
+.contact-form {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid var(--dim);
+  border-radius: 6px;
+  background: transparent;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2rem;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.form-submit:hover {
+  background: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+/* ========== FOOTER ========== */
+.site-footer {
+  text-align: center;
+  padding: 3rem var(--side-pad);
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-top: 1px solid var(--dim);
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+  .showcase-item { height: 50vh; }
+  .bio-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .bio-portrait { max-width: 320px; }
+  .project-card {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .project-card.compact {
+    grid-template-columns: 1fr;
+  }
+  .floating-word { display: none; }
+}
+
+@media (max-width: 900px) {
+  .termin-item {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+  .termin-date { font-size: 0.9rem; }
+  .termin-location { text-align: left; }
+}
+
+@media (max-width: 500px) {
+  :root { --side-pad: 1.2rem; }
+  .showcase-item { height: 40vh; }
+  .hero-name { font-size: clamp(2rem, 10vw, 3rem); }
+  .accordion-num {
+    font-size: 1.8rem;
+    min-width: 1.8rem;
+  }
+  .accordion-header {
+    gap: 0.8rem;
+    padding: 1.2rem 0;
+  }
+  .accordion-content { padding: 0.5rem 0 2rem; }
+  .project-info h3 { font-size: 1.4rem; }
+  .contact-email { font-size: 1.3rem; }
+  .showcase-info h2 { font-size: 1.6rem; }
+}
+
+/* ========== IMAGE CORRECTIONS ========== */
+img[src*="metamorphose-real"] {
+  transform: rotate(-3.8deg) scale(1.07);
+  object-position: center 70%;
+}
+.showcase-item:hover img[src*="metamorphose-real"] {
+  transform: rotate(-3.8deg) scale(1.10);
+}
+
+img[src*="teleskop-318"] {
+  object-position: center 75%;
+}
+
+img[src*="sphaeren-alt2"] {
+  object-position: center 80%;
+}
+
+.showcase-item img {
+  transition: opacity 1.5s ease, transform 8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.showcase-item img.slide-out {
+  opacity: 0;
+}
+
+/* ========== ENTRANCE ANIMATIONS ========== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Parallax base */
+.showcase-item img {
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== GLOBAL FLOATING BEGRIFFE ==================== -->
+<div class="global-words" id="globalWords"></div>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="img/fragmente-hero.jpg" alt="Fragmente – Prismatische Lichtinstallation">
+  </div>
+  <div class="particles" id="particles"></div>
+  <div class="floating-words" id="floatingWords"></div>
+  <h1 class="hero-name">MAXIM M.<br>CHUBAROV</h1>
+  <p class="hero-sub">Konzeptkunst &middot; Multimedia &middot; Creative Production</p>
+  <p class="hero-quote">&bdquo;Es gibt keine Vergangenheit, keine Zukunft &mdash; nur gegenw&auml;rtige Erinnerung, gegenw&auml;rtige Erwartung und folglich nur gegenw&auml;rtige Gegenwart.&ldquo;</p>
+  <div class="hero-scroll">
+    <span></span>
+  </div>
+</section>
+
+<!-- ==================== SHOWCASE ==================== -->
+<div class="showcase-item" data-parallax data-slides="img/fragmente-showcase.jpg,img/fragmente-alt1.jpg,img/fragmente-alt2.jpg" onclick="openProjectModal({title:'Fragmente', meta:'Installation &middot; PARADIGMA 2024 &middot; Konzept &amp; Video', desc:'Eine Multimedia-Installation: 15 Leinw&auml;nde h&auml;ngen von der Decke, einzeln bespielt mit Beamern. Ein begehbarer, hologramm-anmutender Erinnerungsraum.', img:'img/fragmente-showcase.jpg', link:'https://wasistwert.info/fragmente'})">
+  <img src="img/fragmente-showcase.jpg" alt="Fragmente Installation" loading="lazy">
+  <div class="showcase-words">
+    <span class="scattered-word" style="left:6%; top:18%;">immersiv</span>
+    <span class="scattered-word" style="right:10%; top:12%;">Projektion</span>
+    <span class="scattered-word" style="left:42%; top:28%;">Erinnerung</span>
+  </div>
+  <div class="showcase-info">
+    <h2>Fragmente</h2>
+    <div class="showcase-meta">Installation &mdash; PARADIGMA 2024</div>
+  </div>
+</div>
+
+<div class="showcase-item" data-parallax data-slides="img/sphaeren-real.jpg,img/sphaeren-alt1.jpg,img/sphaeren-alt2.jpg" onclick="openProjectModal({title:'Sph&auml;ren', meta:'Installation &middot; con:sens 2022 &middot; Kooperation mit Christoph Faulhaber', desc:'36 aufblasbare B&auml;lle, drei Meter Durchmesser im &ouml;ffentlichen Raum. Projektionsfl&auml;chen f&uuml;r Interaktion und Reibung.', img:'img/sphaeren-real.jpg', link:'https://wasistwert.info/sphaeren'})">
+  <img src="img/sphaeren-real.jpg" alt="Sphären Installation" loading="lazy">
+  <div class="showcase-words">
+    <span class="scattered-word" style="right:7%; top:15%;">öffentlicher Raum</span>
+    <span class="scattered-word" style="left:8%; top:25%;">Körper</span>
+    <span class="scattered-word" style="left:55%; top:10%;">Partizipation</span>
+  </div>
+  <div class="showcase-info">
+    <h2>Sph&auml;ren</h2>
+    <div class="showcase-meta">Installation &mdash; con:sens 2022</div>
+  </div>
+</div>
+
+<div class="showcase-item" data-parallax data-slides="img/teleskopradius.jpg,img/teleskop-103.jpg,img/teleskop-318.jpg" onclick="openTeleskopModal()">
+  <img src="img/teleskopradius.jpg" alt="TELESKOPradius" loading="lazy">
+  <div class="showcase-words">
+    <span class="scattered-word" style="left:5%; top:18%;">Klang</span>
+    <span class="scattered-word" style="right:8%; top:12%;">Licht</span>
+    <span class="scattered-word" style="left:45%; top:25%;">Resonanz</span>
+  </div>
+  <div class="showcase-info">
+    <h2>TELESKOPradius</h2>
+    <div class="showcase-meta">Performance &mdash; UT Connewitz 2025</div>
+  </div>
+</div>
+
+<div class="showcase-item" data-parallax data-slides="img/metamorphose-real.jpg,img/metamorphose-alt1.jpg,img/metamorphose-alt2.jpg" onclick="openProjectModal({title:'Metamorphose &ndash; Welle &amp; Schwingung', meta:'Performance &middot; 2022 &middot; Artist', desc:'Kollaboratives multimediales Projekt mit KAPmodern und Merlin Rainer im Nikolaisaal Potsdam.', img:'img/metamorphose-real.jpg', link:'https://wasistwert.info/metamorphose'})">
+  <img src="img/metamorphose-real.jpg" alt="Metamorphose Performance" loading="lazy">
+  <div class="showcase-words">
+    <span class="scattered-word" style="left:4%; top:14%;">Gleichzeitigkeit</span>
+    <span class="scattered-word" style="right:6%; top:22%;">Zugewandtheit</span>
+    <span class="scattered-word" style="left:48%; top:8%;">Kollektiv</span>
+  </div>
+  <div class="showcase-info">
+    <h2>Metamorphose</h2>
+    <div class="showcase-meta">Performance &mdash; Nikolaisaal Potsdam 2022</div>
+  </div>
+</div>
+
+<!-- ==================== ACCORDION ==================== -->
+<div class="accordion">
+
+  <!-- 01. ÜBER MICH -->
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleSection(this)">
+      <span class="accordion-num">01</span>
+      <span class="accordion-title">&Uuml;ber mich</span>
+      <span class="accordion-toggle">+</span>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
+        <div class="accordion-content">
+          <div class="bio-grid fade-in">
+            <div class="bio-portrait">
+              <img src="img/portrait.jpg" alt="Maxim M. Chubarov" loading="lazy">
+            </div>
+            <div class="bio-text">
+              <h3 style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;margin-bottom:0.8rem;font-variation-settings:'SOFT' 30;">Hi, ich bin Maxim.</h3>
+              <p>Konzeptk&uuml;nstler, Creative Producer und Kurator. Als Gr&uuml;nder des Kollektivs WERT und der Plattform exe.network widme ich mich der Erforschung und Neudefinition des Wertes von Kunst in unserer Gesellschaft.</p>
+              <p>Meine Arbeit umfasst die Entwicklung, Umsetzung und Dokumentation partizipativer und interaktiver Kunstkonzepte, mit dem Ziel: Gemeinschaften zu verbinden und kreative Prozesse zu f&ouml;rdern.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02. ALLE PROJEKTE -->
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleSection(this)">
+      <span class="accordion-num">02</span>
+      <span class="accordion-title">Projekte</span>
+      <span class="accordion-toggle">+</span>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
+        <div class="accordion-content">
+
+          <!-- Projekte -->
+          <div class="project-card compact fade-in" onclick="openProjectModal({title:'Caf&eacute; Lit', meta:'Plattform &middot; seit 2024 &middot; Creative Producer', desc:'Literaturplattform initiiert gemeinsam mit Insa Wilke.', img:'img/cafelit.jpg', link:'https://cafelit.de'})">
+            <div class="project-img-wrap">
+              <img src="img/cafelit.jpg" alt="Café Lit" loading="lazy">
+            </div>
+            <div class="project-info">
+              <h3>Caf&eacute; Lit</h3>
+              <div class="project-meta">Plattform &middot; seit 2024 &middot; Creative Producer</div>
+              <p class="project-desc">Literaturplattform initiiert gemeinsam mit Insa Wilke.</p>
+              <span class="project-link">Mehr erfahren</span>
+            </div>
+          </div>
+
+          <div class="project-card fade-in" onclick="openProjectModal({title:'Sph&auml;ren', meta:'Installation &middot; con:sens 2022 &middot; Kooperation mit Christoph Faulhaber', desc:'36 aufblasbare B&auml;lle, drei Meter Durchmesser im &ouml;ffentlichen Raum. Projektionsfl&auml;chen f&uuml;r Interaktion und Reibung.', img:'img/sphaeren-real.jpg', link:'https://wasistwert.info/sphaeren'})">
+            <div class="project-img-wrap">
+              <img src="img/sphaeren-real.jpg" alt="Sphären" loading="lazy">
+            </div>
+            <div class="project-info">
+              <h3>Sph&auml;ren</h3>
+              <div class="project-meta">Installation &middot; con:sens 2022</div>
+              <p class="project-desc">36 aufblasbare B&auml;lle, drei Meter Durchmesser im &ouml;ffentlichen Raum.</p>
+              <span class="project-link">Mehr erfahren</span>
+            </div>
+          </div>
+
+          <div class="project-card compact fade-in" onclick="openProjectModal({title:'Fragmente', meta:'Installation &middot; PARADIGMA 2024 &middot; Konzept &amp; Video', desc:'Eine Multimedia-Installation: 15 Leinw&auml;nde h&auml;ngen von der Decke, einzeln bespielt mit Beamern. Ein begehbarer, hologramm-anmutender Erinnerungsraum.', img:'img/fragmente-real.jpg', link:'https://wasistwert.info/fragmente'})">
+            <div class="project-img-wrap">
+              <img src="img/fragmente-project.jpg" alt="Fragmente" loading="lazy">
+            </div>
+            <div class="project-info">
+              <h3>Fragmente</h3>
+              <div class="project-meta">Installation &middot; PARADIGMA 2024 &middot; Konzept &amp; Video</div>
+              <p class="project-desc">15 Leinw&auml;nde, einzeln bespielt mit Beamern. Ein begehbarer, hologramm-anmutender Erinnerungsraum.</p>
+              <span class="project-link">Mehr erfahren</span>
+            </div>
+          </div>
+
+          <div class="project-card fade-in" onclick="openProjectModal({title:'MindCanvas', meta:'Immersive &middot; con:sens 2022 &middot; Konzept &amp; Produktion', desc:'Immersive 360-Grad-Projektion. Besucher:innen wirken direkt auf den Raum ein.', img:'img/mindcanvas-real2.jpg', link:'https://wasistwert.info/mindcanvas'})">
+            <div class="project-img-wrap">
+              <img src="img/mindcanvas-real2.jpg" alt="MindCanvas" loading="lazy">
+            </div>
+            <div class="project-info">
+              <h3>MindCanvas</h3>
+              <div class="project-meta">Immersive &middot; con:sens 2022 &middot; Konzept &amp; Produktion</div>
+              <p class="project-desc">Immersive 360-Grad-Projektion. Besucher:innen wirken direkt auf den Raum ein.</p>
+              <span class="project-link">Mehr erfahren</span>
+            </div>
+          </div>
+
+          <div class="project-card fade-in" onclick="openTischModal()">
+            <div class="project-img-wrap">
+              <img src="https://img.youtube.com/vi/7p1_2tatOJ0/maxresdefault.jpg" alt="Der Tisch" loading="lazy">
+            </div>
+            <div class="project-info">
+              <h3>Der Tisch &amp; SAMAR Experience</h3>
+              <div class="project-meta">Installationen &middot; 2025 &middot; Konzept &amp; Produktion</div>
+              <p class="project-desc">Interaktive Tafel und performative Installation mit Rigolo Tanztheater (Schweiz).</p>
+              <span class="project-link">Mehr erfahren</span>
+            </div>
+          </div>
+
+          <div class="project-card compact fade-in" onclick="openProjectModal({title:'Metamorphose &ndash; Welle &amp; Schwingung', meta:'Performance &middot; 2022 &middot; Artist', desc:'Kollaboratives multimediales Projekt mit KAPmodern und Merlin Rainer im Nikolaisaal Potsdam.', img:'img/metamorphose-real.jpg', link:'https://wasistwert.info/metamorphose'})">
+            <div class="project-img-wrap">
+              <img src="img/metamorphose-real.jpg" alt="Metamorphose" loading="lazy">
+            </div>
+            <div class="project-info">
+              <h3>Metamorphose &ndash; Welle &amp; Schwingung</h3>
+              <div class="project-meta">Performance &middot; Nikolaisaal Potsdam 2022</div>
+              <p class="project-desc">Kollaboratives multimediales Projekt mit KAPmodern und Merlin Rainer.</p>
+              <span class="project-link">Mehr erfahren</span>
+            </div>
+          </div>
+
+          <div class="project-card fade-in" onclick="openProjectModal({title:'Meine Eisi', meta:'Film &middot; 2025 &middot; Regie &amp; Produktion', desc:'Imagefilm &uuml;ber die Eisenbahnstra&szlig;e Leipzig. Unternehmer:innen und Menschen, die dort leben und arbeiten.', img:'img/meine-eisi.jpg', link:'https://meine-eisi.de'})">
+            <div class="project-img-wrap">
+              <img src="img/meine-eisi.jpg" alt="Meine Eisi" loading="lazy">
+            </div>
+            <div class="project-info">
+              <h3>Meine Eisi</h3>
+              <div class="project-meta">Film &middot; 2025 &middot; Regie &amp; Produktion</div>
+              <p class="project-desc">Imagefilm &uuml;ber die Eisenbahnstra&szlig;e Leipzig.</p>
+              <span class="project-link">Mehr erfahren</span>
+            </div>
+          </div>
+
+          <div class="project-card compact fade-in" onclick="openTeleskopModal()">
+            <div class="project-img-wrap">
+              <img src="img/teleskopradius.jpg" alt="TELESKOPradius" loading="lazy">
+            </div>
+            <div class="project-info">
+              <h3>TELESKOPradius</h3>
+              <div class="project-meta">Performance &middot; UT Connewitz 2025 &middot; Interaktive Visuals</div>
+              <p class="project-desc">GewandhausChor + Philipp Rumsch + Maxim M. Chubarov. Experimentelle Musik trifft auf interaktive Visuals.</p>
+              <span class="project-link">Mehr erfahren</span>
+            </div>
+          </div>
+
+          <div class="project-card fade-in" onclick="openZeitreiseModal()">
+            <div class="project-img-wrap">
+              <img src="img/zeitreise-475.jpg" alt="Zeitreise in die 90er" loading="lazy">
+            </div>
+            <div class="project-info">
+              <h3>Zeitreise in die 90er</h3>
+              <div class="project-meta">Interaktiver Screen &middot; Stadtgeschichtliches Museum Leipzig 2025</div>
+              <p class="project-desc">Interaktive Medienstation f&uuml;r die Ausstellung &bdquo;Zwischen Aufbruch und Abwicklung. Die 90er in Leipzig.&ldquo;</p>
+              <span class="project-link">Mehr erfahren</span>
+            </div>
+          </div>
+
+          <!-- Text-only projects -->
+          <div class="projects-divider fade-in">Weitere Projekte</div>
+          <ul class="weitere-list">
+            <li class="weitere-item fade-in">
+              <div>
+                <div class="weitere-name"><a href="#" onclick="event.preventDefault();openProjectModal({title:'TRIP Festival',meta:'Gestaltung, Installation, Creative Producer &middot; 2018&ndash;2024',desc:'Audio-visuelles Festival in der Leipziger Clublandschaft.',link:'https://wasistwert.info/trip'})" style="color:inherit;border-bottom:1px solid var(--dim);">TRIP Festival</a></div>
+                <div class="weitere-role">Gestaltung, Installation, Creative Producer</div>
+              </div>
+              <div class="weitere-meta">2018&ndash;2024</div>
+              <div class="weitere-desc">Audio-visuelles Festival in der Leipziger Clublandschaft</div>
+            </li>
+            <li class="weitere-item fade-in">
+              <div>
+                <div class="weitere-name"><a href="#" onclick="event.preventDefault();openProjectModal({title:'Synchronisation',meta:'Creative Producer &amp; Idee &middot; seit 2018',desc:'Kollaboratives Experiment von K&uuml;nstler:innen im ZiMMT &mdash; mehrere Ausgaben seit 2018.',link:'https://www.wasistwert.info/synchronisation'})" style="color:inherit;border-bottom:1px solid var(--dim);">Synchronisation</a></div>
+                <div class="weitere-role">Creative Producer &amp; Idee</div>
+              </div>
+              <div class="weitere-meta">seit 2018</div>
+              <div class="weitere-desc">Kollaboratives Experiment von K&uuml;nstler:innen im ZiMMT &mdash; mehrere Ausgaben seit 2018</div>
+            </li>
+            <li class="weitere-item fade-in">
+              <div>
+                <div class="weitere-name"><a href="#" onclick="event.preventDefault();openProjectModal({title:'hitness.club',meta:'Gestaltung, Artist &amp; Gr&uuml;ndungsmitglied &middot; seit 2020',desc:'Fernsehsender, Plattform f&uuml;r audiovisuelle Bildung, Konzertlocation.',link:'https://hitness.club'})" style="color:inherit;border-bottom:1px solid var(--dim);">hitness.club</a></div>
+                <div class="weitere-role">Gestaltung, Artist &amp; Gr&uuml;ndungsmitglied</div>
+              </div>
+              <div class="weitere-meta">seit 2020</div>
+              <div class="weitere-desc">Fernsehsender, Plattform f&uuml;r audiovisuelle Bildung, Konzertlocation</div>
+            </li>
+            <li class="weitere-item fade-in">
+              <div>
+                <div class="weitere-name"><a href="#" onclick="event.preventDefault();openProjectModal({title:'exe.network',meta:'Gr&uuml;ndungsmitglied &middot; aktuell',desc:'K&uuml;nstler:innen Plattform und Netzwerk.',link:'http://exe.network'})" style="color:inherit;border-bottom:1px solid var(--dim);">exe.network</a></div>
+                <div class="weitere-role">Gr&uuml;ndungsmitglied</div>
+              </div>
+              <div class="weitere-meta">aktuell</div>
+              <div class="weitere-desc">K&uuml;nstler:innen Plattform und Netzwerk</div>
+            </li>
+            <li class="weitere-item fade-in">
+              <div>
+                <div class="weitere-name"><a href="#" onclick="event.preventDefault();openProjectModal({title:'appletree garden',meta:'Gestaltung, Installation, Creative Producer &middot; seit 2014',desc:'J&auml;hrliches Musikfestival in Diepholz.',link:'https://appletreegarden.de'})" style="color:inherit;border-bottom:1px solid var(--dim);">appletree garden</a></div>
+                <div class="weitere-role">Gestaltung, Installation, Creative Producer</div>
+              </div>
+              <div class="weitere-meta">seit 2014</div>
+              <div class="weitere-desc">J&auml;hrliches Musikfestival in Diepholz</div>
+            </li>
+            <li class="weitere-item fade-in">
+              <div>
+                <div class="weitere-name"><a href="#" onclick="event.preventDefault();openProjectModal({title:'ThinkTank: State, Structure &amp; Future of Streaming',meta:'Gestaltung &amp; Creative Producer &middot; 2022',desc:'Symposium zur nachhaltigen Netzwerkarbeit.',link:'https://sphere-radio.net/projekte/thinktank-state-structure-future-of-streaming-2/'})" style="color:inherit;border-bottom:1px solid var(--dim);">ThinkTank: State, Structure &amp; Future of Streaming</a></div>
+                <div class="weitere-role">Gestaltung &amp; Creative Producer</div>
+              </div>
+              <div class="weitere-meta">2022</div>
+              <div class="weitere-desc">Symposium zur nachhaltigen Netzwerkarbeit</div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03. KOLLEKTIV WERT -->
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleSection(this)">
+      <span class="accordion-num">03</span>
+      <span class="accordion-title">Kollektiv WERT</span>
+      <span class="accordion-toggle">+</span>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
+        <div class="accordion-content">
+          <div class="fade-in" style="margin-bottom:2rem;border-radius:8px;overflow:hidden;max-height:340px;">
+            <img src="img/wert-fenster.jpg" alt="Kollektiv WERT – Galerie KUB Fenster" loading="lazy" style="width:100%;height:340px;object-fit:cover;object-position:center 45%;">
+          </div>
+          <p class="wert-intro fade-in">Seit 2020 erforsche ich mit dem Kollektiv WERT den Wert von Kunst in j&auml;hrlichen Zyklen.</p>
+          <div class="wert-timeline fade-in">
+            <div class="wert-year" style="cursor:pointer;" onclick="openProjectModal({title:'WAS IST WERT? 2020',meta:'Zyklus 1 &middot; Galerie KUB Leipzig',desc:'Auftakt und Grundsatzfrage: Welche Werte tragen k&uuml;nstlerische Praxis, Gemeinschaft und &Ouml;ffentlichkeit?',link:'https://www.wasistwert.info/wasistwert'})">
+              <strong>WAS IST WERT? 2020</strong>
+              <span>Auftakt und Grundsatzfrage in der Galerie KUB.</span>
+            </div>
+            <div class="wert-year" style="cursor:pointer;" onclick="openProjectModal({title:'RESONANZ 2021',meta:'Zyklus 2 &middot; Galerie KUB Leipzig',desc:'Resonanz als Gegenbewegung und Experiment f&uuml;r Gleichzeitigkeit. Klang-, Raum- und K&ouml;rperexperimente machten wechselseitige Wahrnehmung erfahrbar.',link:'https://www.wasistwert.info/resonanz'})">
+              <strong>RESONANZ 2021</strong>
+              <span>Zugewandtheit, Gleichzeitigkeit und kollektive Resonanz.</span>
+            </div>
+            <div class="wert-year" style="cursor:pointer;" onclick="openProjectModal({title:'con:sens 2022',meta:'Zyklus 3 &middot; Galerie KUB Leipzig',desc:'Konsens, Dissens, Co-Autor:innenschaft: Moderierte Aushandlungsprozesse, provozierte Reibung, kollaborative Text- und Raumarbeiten.',link:'https://www.wasistwert.info/consens'})">
+              <strong>con:sens 2022</strong>
+              <span>mit:Sinn, mit:Sinnen.</span>
+            </div>
+            <div class="wert-year" style="cursor:pointer;" onclick="openProjectModal({title:'Synergie 2023',meta:'Zyklus 4 &middot; Galerie KUB Leipzig',desc:'Mehr als die Summe unserer Bestandteile: Disziplin&uuml;bergreifende Duos und Trios verbinden Ressourcen, Methoden und Handschriften.',link:'https://www.wasistwert.info/synergie'})">
+              <strong>Synergie 2023</strong>
+              <span>Unser Schaffen ist mehr als nur die Summe unserer Bestandteile.</span>
+            </div>
+            <div class="wert-year" style="cursor:pointer;" onclick="openProjectModal({title:'PARADIGMA 2024',meta:'Zyklus 5 &middot; Galerie KUB Leipzig',desc:'Reflexion und Revision von Annahmen, Werkzeugen und Blickachsen. Experimente zeigten, wie methodische Wechsel neue Inhalte erm&ouml;glichen.',link:'https://www.wasistwert.info/paradigma'})">
+              <strong>PARADIGMA 2024</strong>
+              <span>Reflexion und Revision von Annahmen und Blickachsen.</span>
+            </div>
+            <div class="wert-year" style="cursor:pointer;" onclick="openProjectModal({title:'SHiFT 2025',meta:'Zyklus 6 &middot; ZiMMT Leipzig',desc:'Verschiebung als Medium: Mit dem ZiMMT als Partner wurden immersive Setups und interaktive Formate erprobt.',link:'https://www.wasistwert.info/'})">
+              <strong>SHiFT 2025</strong>
+              <span>Verschiebung als Medium. Erstmals im ZiMMT.</span>
+            </div>
+            <div class="wert-year" style="cursor:pointer;" onclick="openProjectModal({title:'SPEKTRUM 2026',meta:'Zyklus 7 &middot; ZiMMT Leipzig &middot; 17.&ndash;23. August',desc:'Nicht mehr: Was ist WERT? Sondern: Wie ist WERT? Abschluss des 7-Jahres-Zyklus.',link:'https://www.wasistwert.info/'})">
+              <strong>SPEKTRUM 2026</strong>
+              <span>Nicht mehr: Was ist WERT? Sondern: Wie ist WERT?</span>
+            </div>
+          </div>
+          <a href="https://wasistwert.info" target="_blank" class="wert-link fade-in">wasistwert.info</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04. FILM & VIDEO -->
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleSection(this)">
+      <span class="accordion-num">04</span>
+      <span class="accordion-title">Film &amp; Video</span>
+      <span class="accordion-toggle">+</span>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
+        <div class="accordion-content">
+
+          <h4 class="film-subsection-title fade-in">Trailer &amp; Dokumentation</h4>
+          <div class="video-grid fade-in">
+            <div class="video-card" onclick="openVideoModal('G52IpiUX9n0', '5 Jahre ZiMMT', 'Dokumentation &mdash; 2025', '5 Jahre ZiMMT &ndash; Zentrum f&uuml;r Immersive Medienkunst, Musik &amp; Technologie in Leipzig. Regie &amp; Produktion.')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/G52IpiUX9n0/mqdefault.jpg" alt="5 Jahre ZiMMT" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">5 Jahre ZiMMT</span>
+                <span class="video-meta">Dokumentation &mdash; 2025</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('v7De5WDWdUU', 'Hidden Heroes', 'Dokumentation &mdash; 2025', 'Multimediales Ausstellungsprojekt der Fotok&uuml;nstlerin Nietze &uuml;ber Endometriose und Adenomyose.')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/v7De5WDWdUU/mqdefault.jpg" alt="Hidden Heroes" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Hidden Heroes</span>
+                <span class="video-meta">Dokumentation &mdash; 2025</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('Z5ks6fICz-8', 'Meine Eisi', 'Regie &mdash; 2025', 'Imagefilm &uuml;ber die Eisenbahnstra&szlig;e Leipzig.')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/Z5ks6fICz-8/mqdefault.jpg" alt="Meine Eisi" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Meine Eisi</span>
+                <span class="video-meta">Regie &mdash; 2025</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('TXKgNseR57Y', 'SHiFT 2025 &ndash; Kollektiv WERT im ZiMMT', 'Trailer &mdash; 2025', 'SHiFT 2025 &ndash; Kollektiv WERT im ZiMMT')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/TXKgNseR57Y/mqdefault.jpg" alt="SHiFT 2025" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">SHiFT 2025 &ndash; Kollektiv WERT</span>
+                <span class="video-meta">Trailer &mdash; 2025</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('mfx_-Wmk8Zk', 'TRIP 2023 &ndash; Conne Island Leipzig', 'Trailer &mdash; 2023', 'TRIP Festival 2023 &ndash; Conne Island Leipzig')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/mfx_-Wmk8Zk/mqdefault.jpg" alt="TRIP 2023" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">TRIP 2023 &ndash; Conne Island</span>
+                <span class="video-meta">Trailer &mdash; 2023</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('jUFyuEa0r8A', 'con:sens / Synergie &ndash; Kollektiv WERT', 'Trailer &mdash; 2023', 'R&uuml;ckblick con:sens und Ausblick Synergie')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/jUFyuEa0r8A/mqdefault.jpg" alt="con:sens / Synergie" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">con:sens / Synergie &ndash; Kollektiv WERT</span>
+                <span class="video-meta">Trailer &mdash; 2023</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('BbBoanvv2XI', 'DOK Neuland @ MdbK Leipzig', 'Dokumentation &mdash; 2023', 'VR- und XR-Ausstellung der DOK Leipzig im MdbK')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/BbBoanvv2XI/mqdefault.jpg" alt="DOK Neuland" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">DOK Neuland @ MdbK Leipzig</span>
+                <span class="video-meta">Dokumentation &mdash; 2023</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('V1KNbN-4uc0', 'European Creators Lab 2023', 'Dokumentation &mdash; 2023', 'Kreatives Hub f&uuml;r VR- und XR-Experiences')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/V1KNbN-4uc0/mqdefault.jpg" alt="European Creators Lab" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">European Creators Lab 2023</span>
+                <span class="video-meta">Dokumentation &mdash; 2023</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('PlEzQ-HJYwg', 'Waldbad Oase @ appletree garden', 'Dokumentation &mdash; 2023', 'Community Space auf dem appletree garden festival')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/PlEzQ-HJYwg/mqdefault.jpg" alt="Waldbad Oase" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Waldbad Oase @ appletree garden</span>
+                <span class="video-meta">Dokumentation &mdash; 2023</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('7p1_2tatOJ0', 'Der Tisch &ndash; Interaktive Tafel', 'Installation &mdash; 2025', 'Die interaktive lange Tafel l&auml;dt ein sich dazuzusetzen, zu experimentieren und sich zu begegnen.')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/7p1_2tatOJ0/mqdefault.jpg" alt="Der Tisch" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Der Tisch &ndash; Interaktive Tafel</span>
+                <span class="video-meta">Installation &mdash; 2025</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('PHEDcexqu8k', 'SAMAR Experience', 'Installation &mdash; 2025', 'Rigolo Tanztheater, Lokremise Wil (Schweiz) &ndash; Kollektiv WERT')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/PHEDcexqu8k/mqdefault.jpg" alt="SAMAR Experience" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">SAMAR Experience &ndash; Rigolo Tanztheater</span>
+                <span class="video-meta">Installationen &mdash; Schweiz 2025</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('CYXRjvQt_Iw', 'Humboldt Forum Berlin', 'Dokumentation &mdash; 2023', 'Wochenende der Demokratie am Humboldt Forum')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/CYXRjvQt_Iw/mqdefault.jpg" alt="Humboldt Forum Berlin" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Humboldt Forum Berlin</span>
+                <span class="video-meta">Dokumentation &mdash; 2023</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('HXH-b3cfc2E', 'sens Festival 2024', 'Dokumentation &mdash; 2024', 'Olfaktorisches Festival im ZiMMT Leipzig')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/HXH-b3cfc2E/mqdefault.jpg" alt="sens Festival 2024" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">sens Festival 2024</span>
+                <span class="video-meta">Dokumentation &mdash; 2024</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('y23NQssKUjw', 'sens Festival 2023', 'Dokumentation &mdash; 2023', 'Olfaktorisches Festival im ZiMMT Leipzig')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/y23NQssKUjw/mqdefault.jpg" alt="sens Festival 2023" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">sens Festival 2023</span>
+                <span class="video-meta">Dokumentation &mdash; 2023</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('XwLzDEi5vqw', '&bdquo;Damit das Licht an bleibt&ldquo;', 'Kampagne &mdash; 2020', 'Fundraising zum Erhalt des UT Connewitz w&auml;hrend der Corona-Pandemie')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/XwLzDEi5vqw/mqdefault.jpg" alt="Damit das Licht an bleibt" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">&bdquo;Damit das Licht an bleibt&ldquo;</span>
+                <span class="video-meta">Kampagne &mdash; 2020</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('Kj41risWpl4', 'Der Allergiker', 'Webserie &mdash; 2020-2021', 'Mini-Webserie &uuml;ber das Landleben')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/Kj41risWpl4/mqdefault.jpg" alt="Der Allergiker" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Der Allergiker</span>
+                <span class="video-meta">Webserie &mdash; 2020-2021</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('G-gc2hoy7os', '#ECK Offspace Kaisitz', 'Dokumentation &mdash; 2024', 'Offspace-Projekt in Kaisitz')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/G-gc2hoy7os/mqdefault.jpg" alt="#ECK Offspace Kaisitz" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">#ECK Offspace Kaisitz</span>
+                <span class="video-meta">Dokumentation &mdash; 2024</span>
+              </div>
+            </div>
+          </div>
+          <ul class="film-text-list fade-in">
+            <li>TRIP Festival Trailer (2024, 2022, 2021)</li>
+          </ul>
+
+          <h4 class="film-subsection-title fade-in">Musikvideos</h4>
+          <div class="video-grid fade-in">
+            <div class="video-card" onclick="openVideoModal('shuOAcKPjB4', 'Tr&auml;nen &ndash; Sturres dummes Herz', 'Creative Producer, Set-Design &mdash; 2023', 'Tr&auml;nen &ndash; Creative Producer, Set-Design')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/shuOAcKPjB4/mqdefault.jpg" alt="Tränen – Sturres dummes Herz" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Tr&auml;nen &ndash; Sturres dummes Herz</span>
+                <span class="video-meta">Creative Producer, Set-Design &mdash; 2023</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('z1E7o2d3vnQ', 'Tr&auml;nen &ndash; Kapitulation', 'Creative Producer, Set-Design &mdash; 2023', 'Tr&auml;nen &ndash; Creative Producer, Set-Design')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/z1E7o2d3vnQ/mqdefault.jpg" alt="Tränen – Kapitulation" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Tr&auml;nen &ndash; Kapitulation</span>
+                <span class="video-meta">Creative Producer, Set-Design &mdash; 2023</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('8d7L0Sfxgyc', 'Brockhoff &ndash; WHY?', 'Creative Producer &mdash; 2023', 'Brockhoff &ndash; Creative Producer')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/8d7L0Sfxgyc/mqdefault.jpg" alt="Brockhoff – WHY?" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Brockhoff &ndash; WHY?</span>
+                <span class="video-meta">Creative Producer &mdash; 2023</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('9Pb2PrNPJ_I', 'Kaboros &ndash; Lebensmittel', 'Regie, Kamera, Schnitt &mdash; 2023', 'Kaboros &ndash; Regie, Kamera, Schnitt')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/9Pb2PrNPJ_I/mqdefault.jpg" alt="Kaboros – Lebensmittel" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Kaboros &ndash; Lebensmittel</span>
+                <span class="video-meta">Regie, Kamera, Schnitt &mdash; 2023</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('xQegSyBLxFs', 'Balcony DC &ndash; Silent Love', 'Creative Producer, Set-Design, Idee &mdash; 2020', 'Balcony DC &ndash; Creative Producer, Set-Design, Idee')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/xQegSyBLxFs/mqdefault.jpg" alt="Balcony DC – Silent Love" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Balcony DC &ndash; Silent Love</span>
+                <span class="video-meta">Creative Producer, Set-Design, Idee &mdash; 2020</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('8lrSC3Z_EQ0', 'Day Slovo &ndash; Melanka Piroschik', 'Live &mdash; RESONANZ 2021', 'Musikvideo aus der RESONANZ-Reihe im Rahmen von Kollektiv WERT')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/8lrSC3Z_EQ0/mqdefault.jpg" alt="Day Slovo – Melanka Piroschik" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Day Slovo &ndash; Melanka Piroschik</span>
+                <span class="video-meta">Live &mdash; RESONANZ 2021</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('slooaVIdw0M', 'KABOROS (Live)', 'Live &mdash; RESONANZ 2021', 'KABOROS live @ naTo / Galerie KUB Leipzig')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/slooaVIdw0M/mqdefault.jpg" alt="KABOROS Live" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">KABOROS (Live)</span>
+                <span class="video-meta">Live &mdash; RESONANZ 2021</span>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('X9SW-vV1RAw', 'Ponga Mi$$i &ndash; Mein Prinz', 'Live &mdash; RESONANZ 2021', 'Ponga Mi$$i live @ Galerie KUB Leipzig')">
+              <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/X9SW-vV1RAw/mqdefault.jpg" alt="Ponga Mi$$i – Mein Prinz" loading="lazy">
+                <div class="video-play">&#9654;</div>
+              </div>
+              <div class="video-info">
+                <span class="video-title">Ponga Mi$$i &ndash; Mein Prinz</span>
+                <span class="video-meta">Live &mdash; RESONANZ 2021</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- ==================== TERMINE ==================== -->
+<section class="termine-section">
+  <h2 class="termine-heading fade-in">Termine</h2>
+  <div class="termin-item fade-in">
+    <div class="termin-date">17.&ndash;23. Aug 2026</div>
+    <div class="termin-info">
+      <h4>SPEKTRUM &ndash; Kollektiv WERT</h4>
+      <span>Abschluss des 7-Jahres-Zyklus. Open Call + Netzwerk.</span>
+    </div>
+    <div class="termin-location">ZiMMT, Leipzig</div>
+  </div>
+  <div class="termin-item fade-in">
+    <div class="termin-date">28. Okt 2026</div>
+    <div class="termin-info">
+      <h4>&bdquo;...denn jeder ist die Welt.&ldquo;</h4>
+      <span>mit KAPmodern</span>
+    </div>
+    <div class="termin-location">Potsdam</div>
+  </div>
+</section>
+
+<!-- ==================== KONTAKT ==================== -->
+<section class="contact-section">
+  <div class="wrap">
+    <div class="contact-links fade-in">
+      <a href="https://instagram.com/maxim.maximovich_" target="_blank" class="contact-link-pill">Instagram</a>
+      <a href="https://youtube.com/channel/UCtAREkq1IPnB5Sdi83L_I7w" target="_blank" class="contact-link-pill">YouTube</a>
+      <a href="#" class="contact-link-pill" onclick="event.preventDefault();openContactModal()">Kontakt</a>
+      <a href="#" class="contact-link-pill" onclick="event.preventDefault();openBerichteModal()">Berichte</a>
+      <a href="#" class="contact-link-pill" onclick="event.preventDefault();openLinksModal()">Links</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  Maxim M. Chubarov &middot; Leipzig &middot; 2026 &middot; <a href="#" onclick="event.preventDefault();openImpressumModal()" style="color:var(--muted);border-bottom:1px solid var(--dim);">Impressum</a>
+</footer>
+
+<!-- Hidden form for Netlify detection -->
+<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="bot-field">
+  <input name="name">
+  <input name="email">
+  <input name="betreff">
+  <textarea name="message"></textarea>
+</form>
+
+<!-- ==================== MODAL ==================== -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-content" id="modalContent">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+/* ========== GLOBAL DRIFTING BEGRIFFE ========== */
+(function() {
+  // polarity: 1 = repel (flee), -1 = attract (curious)
+  var begriffe = [
+    // Showcase-Begriffe
+    { text: 'immersiv', pol: -1 },
+    { text: 'Projektion', pol: 1 },
+    { text: 'Erinnerung', pol: -1 },
+    { text: 'öffentlicher Raum', pol: 1 },
+    { text: 'Körper', pol: -1 },
+    { text: 'Partizipation', pol: -1 },
+    { text: 'Gleichzeitigkeit', pol: 1 },
+    { text: 'Zugewandtheit', pol: -1 },
+    { text: 'Kollektiv', pol: -1 },
+    { text: 'Verschiebung', pol: 1 },
+    { text: 'Mehrdeutigkeit', pol: 1 },
+    { text: 'Kollaboration', pol: -1 },
+    // WERT-Zyklen
+    { text: 'Wahrnehmung', pol: -1 },
+    { text: 'Resonanz', pol: -1 },
+    { text: 'Konsens', pol: -1 },
+    { text: 'Synergie', pol: -1 },
+    { text: 'Paradigma', pol: 1 },
+    { text: 'Spektrum', pol: -1 },
+    // Weitere
+    { text: 'Multimedia', pol: 1 },
+    { text: 'Klang', pol: -1 },
+    { text: 'Licht', pol: -1 },
+    { text: 'Gemeinschaft', pol: -1 },
+    { text: 'Begegnung', pol: -1 },
+    { text: 'Raum', pol: 1 },
+    { text: 'Diskurs', pol: 1 },
+    { text: 'Transformation', pol: 1 },
+    { text: 'Offenheit', pol: -1 },
+    { text: 'Austausch', pol: -1 },
+    { text: 'Experiment', pol: 1 },
+    { text: 'Prozess', pol: -1 },
+    { text: 'Netzwerk', pol: -1 },
+    { text: 'Niederschwellig', pol: -1 },
+    { text: 'Interdisziplinarität', pol: 1 },
+    { text: 'Installation', pol: 1 },
+    { text: 'Performance', pol: -1 },
+    { text: 'Dokumentation', pol: 1 },
+    { text: 'Wertschätzung', pol: -1 },
+    { text: 'Sichtbarkeit', pol: -1 }
+  ];
+  var container = document.getElementById('globalWords');
+  if (!container) return;
+
+  function spawnWord() {
+    // Avoid duplicates — check what's currently visible
+    var visible = {};
+    container.querySelectorAll('.global-word').forEach(function(w) { visible[w.textContent] = true; });
+    var available = begriffe.filter(function(b) { return !visible[b.text]; });
+    if (available.length === 0) available = begriffe;
+    var entry = available[Math.floor(Math.random() * available.length)];
+    var el = document.createElement('span');
+    el.className = 'global-word';
+    el.textContent = entry.text;
+    el.dataset.polarity = entry.pol;
+
+    var startX = Math.random() * 90 + 5;
+    var startY = Math.random() * 80 + 10;
+    var driftX = (Math.random() - 0.5) * 60;
+    var driftY = (Math.random() - 0.5) * 40;
+    var size = 0.7 + Math.random() * 0.4;
+    var dur = 12 + Math.random() * 16;
+
+    el.style.cssText =
+      'left:' + startX + '%;' +
+      'top:' + startY + '%;' +
+      'font-size:' + size + 'rem;' +
+      'color:var(--muted);';
+
+    el.dataset.baseOpacity = '0.35';
+    el.animate([
+      { opacity: 0, transform: 'translate(0, 0)' },
+      { opacity: 0.35, offset: 0.15 },
+      { opacity: 0.35, offset: 0.85 },
+      { opacity: 0, transform: 'translate(' + driftX + 'px, ' + driftY + 'px)' }
+    ], { duration: dur * 1000, easing: 'ease-in-out' });
+
+    container.appendChild(el);
+    setTimeout(function() { el.remove(); }, dur * 1000);
+  }
+
+  // Initial burst — more visible, staggered entrance
+  begriffe.forEach(function(entry, i) {
+    setTimeout(function() {
+      var el = document.createElement('span');
+      el.className = 'global-word';
+      el.textContent = entry.text;
+      el.dataset.polarity = entry.pol;
+
+      var startX = 8 + (i % 4) * 22 + Math.random() * 10;
+      var startY = 15 + Math.floor(i / 4) * 25 + Math.random() * 10;
+      var driftX = (Math.random() - 0.5) * 80;
+      var driftY = (Math.random() - 0.5) * 50;
+      var size = 0.8 + Math.random() * 0.5;
+      var dur = 16 + Math.random() * 12;
+
+      el.style.cssText =
+        'left:' + startX + '%;' +
+        'top:' + startY + '%;' +
+        'font-size:' + size + 'rem;' +
+        'color:var(--muted);';
+
+      el.dataset.baseOpacity = '0.6';
+      el.animate([
+        { opacity: 0, transform: 'translate(0, 0)' },
+        { opacity: 0.65, offset: 0.1 },
+        { opacity: 0.6, offset: 0.4 },
+        { opacity: 0.35, offset: 0.8 },
+        { opacity: 0, transform: 'translate(' + driftX + 'px, ' + driftY + 'px)' }
+      ], { duration: dur * 1000, easing: 'ease-in-out' });
+
+      container.appendChild(el);
+      setTimeout(function() { el.remove(); }, dur * 1000);
+    }, i * 400);
+  });
+
+  // Then keep spawning subtler ones
+  setTimeout(function() { setInterval(spawnWord, 5000); }, 6000);
+
+  // Scroll moves begriffe with the page (since container is fixed)
+  var lastScrollY = window.pageYOffset;
+  window.addEventListener('scroll', function() {
+    var scrollDelta = window.pageYOffset - lastScrollY;
+    lastScrollY = window.pageYOffset;
+    var words = container.querySelectorAll('.global-word');
+    words.forEach(function(el) {
+      var p = getPhysics(el);
+      p.oy -= scrollDelta;
+    });
+  }, { passive: true });
+
+  // Fade words based on scroll position + text overlap
+  function updateVisibility() {
+    var textAreas = document.querySelectorAll('.accordion, .termine-section, .contact-section, .site-footer');
+    var words = container.querySelectorAll('.global-word');
+    var scrollFade = Math.max(0.15, 1 - window.pageYOffset / (document.body.scrollHeight * 0.4));
+    words.forEach(function(el) {
+      var wr = el.getBoundingClientRect();
+      var overText = false;
+      textAreas.forEach(function(area) {
+        var ar = area.getBoundingClientRect();
+        if (wr.bottom > ar.top && wr.top < ar.bottom && wr.right > ar.left && wr.left < ar.right) {
+          overText = true;
+        }
+      });
+      var base = parseFloat(el.dataset.baseOpacity || 0.35) * scrollFade;
+      var target = overText ? 0.03 : base;
+      var current = parseFloat(el.style.opacity) || 0;
+      el.style.opacity = current + (target - current) * 0.08;
+    });
+  }
+  var visTicking = false;
+  window.addEventListener('scroll', function() {
+    if (!visTicking) {
+      requestAnimationFrame(function() { updateVisibility(); visTicking = false; });
+      visTicking = true;
+    }
+  }, { passive: true });
+  setInterval(updateVisibility, 100);
+
+  // Physics simulation — words repel from mouse AND each other
+  var mouseX = -9999, mouseY = -9999;
+  document.addEventListener('mousemove', function(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // Store velocity per element
+  var wordPhysics = new WeakMap();
+
+  function getPhysics(el) {
+    if (!wordPhysics.has(el)) {
+      wordPhysics.set(el, { vx: 0, vy: 0, ox: 0, oy: 0 });
+    }
+    return wordPhysics.get(el);
+  }
+
+  function simulate() {
+    var allWords = document.querySelectorAll('.global-word, .showcase-words .scattered-word');
+    var rects = [];
+    allWords.forEach(function(el) {
+      var r = el.getBoundingClientRect();
+      var p = getPhysics(el);
+      rects.push({ el: el, cx: r.left + r.width / 2 - p.ox, cy: r.top + r.height / 2 - p.oy, p: p });
+    });
+
+    for (var i = 0; i < rects.length; i++) {
+      var a = rects[i];
+      var fx = 0, fy = 0;
+
+      // Mouse — polarity determines attract (-1) or repel (1)
+      var pol = parseFloat(a.el.dataset.polarity || 1);
+      var dx = (a.cx + a.p.ox) - mouseX;
+      var dy = (a.cy + a.p.oy) - mouseY;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      var radius = pol > 0 ? 120 : 250;
+      if (dist < radius && dist > 8) {
+        var strength = pol > 0 ? 0.5 : 0.12;
+        var force = (radius - dist) / radius * strength;
+        fx += (dx / dist) * force * pol;
+        fy += (dy / dist) * force * pol;
+      }
+      // Attracted words keep comfortable distance (80px)
+      if (pol < 0 && dist < 80 && dist > 0) {
+        var pushBack = (80 - dist) / 80 * 0.4;
+        fx += (dx / dist) * pushBack;
+        fy += (dy / dist) * pushBack;
+      }
+
+      // No spring back — they stay where they drift to
+      // Just very gentle friction to stop eventually
+      a.p.vx = (a.p.vx + fx) * 0.98;
+      a.p.vy = (a.p.vy + fy) * 0.98;
+      a.p.ox += a.p.vx;
+      a.p.oy += a.p.vy;
+
+      // Clamp
+      var maxD = 300;
+      a.p.ox = Math.max(-maxD, Math.min(maxD, a.p.ox));
+      a.p.oy = Math.max(-maxD, Math.min(maxD, a.p.oy));
+
+      a.el.style.marginLeft = a.p.ox + 'px';
+      a.el.style.marginTop = a.p.oy + 'px';
+    }
+
+    requestAnimationFrame(simulate);
+  }
+  simulate();
+})();
+
+/* ========== FLOATING WORDS (only cycle names) ========== */
+(function() {
+  var words = [
+    { text: 'WERT', top: '10%', left: '6%', size: '2.4rem', opacity: 0.18 },
+    { text: 'RESONANZ', top: '20%', left: '78%', size: '1.8rem', opacity: 0.14 },
+    { text: 'CON:SENS', top: '38%', left: '4%', size: '1.6rem', opacity: 0.12 },
+    { text: 'SYNERGIE', top: '70%', left: '82%', size: '1.7rem', opacity: 0.13 },
+    { text: 'PARADIGMA', top: '80%', left: '12%', size: '1.5rem', opacity: 0.12 },
+    { text: 'SHIFT', top: '60%', left: '70%', size: '1.9rem', opacity: 0.15 },
+    { text: 'SPEKTRUM', top: '46%', left: '86%', size: '2.2rem', opacity: 0.17 }
+  ];
+  var container = document.getElementById('floatingWords');
+  if (!container) return;
+
+  words.forEach(function(w, i) {
+    var el = document.createElement('span');
+    el.className = 'floating-word';
+    el.textContent = w.text;
+    el.style.cssText =
+      'font-size:' + w.size +
+      ';opacity:' + w.opacity +
+      ';top:' + w.top +
+      ';left:' + w.left +
+      ';animation:drift-' + (i % 4) + ' 35s ease-in-out 0s infinite alternate';
+    container.appendChild(el);
+  });
+
+  var style = document.createElement('style');
+  style.textContent = [
+    '@keyframes drift-0 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(40px, -25px) rotate(1.5deg); } }',
+    '@keyframes drift-1 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-35px, 30px) rotate(-1deg); } }',
+    '@keyframes drift-2 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(25px, 35px) rotate(0.8deg); } }',
+    '@keyframes drift-3 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-40px, -20px) rotate(-1.5deg); } }'
+  ].join('\n');
+  document.head.appendChild(style);
+})();
+
+/* ========== ACCORDION ========== */
+function toggleSection(header) {
+  var section = header.parentElement;
+  var wasOpen = section.classList.contains('open');
+
+  document.querySelectorAll('.accordion-section').forEach(function(s) {
+    s.classList.remove('open');
+  });
+
+  if (!wasOpen) {
+    section.classList.add('open');
+    setTimeout(function() {
+      section.querySelectorAll('.fade-in').forEach(function(el) {
+        el.classList.add('visible');
+      });
+    }, 100);
+    setTimeout(function() {
+      header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 200);
+  }
+}
+
+/* ========== MODAL SYSTEM ========== */
+function openProjectModal(data) {
+  var body = document.getElementById('modalBody');
+  var modal = document.getElementById('modalContent');
+  var html = '';
+  if (data.link) {
+    // Calculate scale so 1400px fits in modal width
+    var availWidth = Math.min(window.innerWidth * 0.95 - 80, 1400);
+    var scale = availWidth / 1400;
+    html += '<div class="modal-iframe-wrap" style="--iframe-scale:' + scale.toFixed(3) + ';">';
+    html += '<iframe class="modal-iframe" src="' + data.link + '" frameborder="0"></iframe>';
+    html += '</div>';
+  }
+  html += '<h2 class="modal-title">' + data.title + '</h2>';
+  html += '<div class="modal-meta">' + data.meta + '</div>';
+  if (data.link) html += '<a href="' + data.link + '" target="_blank" class="modal-link">In neuem Tab &ouml;ffnen</a>';
+  body.innerHTML = html;
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function openVideoModal(youtubeId, title, meta, desc) {
+  var body = document.getElementById('modalBody');
+  var html = '<div style="position:relative;cursor:pointer;" onclick="this.innerHTML=\'<iframe class=modal-video src=https://www.youtube.com/embed/' + youtubeId + '?autoplay=1 frameborder=0 allow=autoplay;encrypted-media allowfullscreen></iframe>\'">' +
+    '<img src="https://img.youtube.com/vi/' + youtubeId + '/hqdefault.jpg" class="modal-video" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;" onerror="this.src=this.src.replace(\'hqdefault\',\'mqdefault\')">' +
+    '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;color:white;background:rgba(0,0,0,0.25);border-radius:8px;">&#9654;</div>' +
+    '</div>';
+  html += '<h2 class="modal-title">' + title + '</h2>';
+  html += '<div class="modal-meta">' + meta + '</div>';
+  if (desc) html += '<p class="modal-desc">' + desc + '</p>';
+  body.innerHTML = html;
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow = '';
+  // Stop any playing video or iframe
+  var iframes = document.querySelectorAll('.modal-video, .modal-iframe');
+  iframes.forEach(function(iframe) { iframe.src = ''; });
+}
+
+function openTischModal() {
+  var body = document.getElementById('modalBody');
+  body.innerHTML =
+    '<h2 class="modal-title">Der Tisch &amp; SAMAR Experience</h2>' +
+    '<div class="modal-meta">Installationen &middot; 2025 &middot; Konzept &amp; Produktion</div>' +
+    '<p class="modal-desc">Der interaktive Tisch l&auml;dt ein sich dazuzusetzen, zu experimentieren und sich zu begegnen &ndash; ein zentrales Zusammenkunftsobjekt, anprojiziert und bespielt. Die SAMAR Experience mit Rigolo Tanztheater in der Lokremise Wil (Schweiz) &uuml;bertr&auml;gt diesen Ansatz in einen performativen Kontext.</p>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;">' +
+    '<div class="video-card" onclick="event.stopPropagation();openVideoModal(\'7p1_2tatOJ0\', \'Der Tisch\', \'Installation — 2025\', \'Die interaktive lange Tafel.\')">' +
+    '<div class="video-thumb"><img src="https://img.youtube.com/vi/7p1_2tatOJ0/mqdefault.jpg" alt="Der Tisch" loading="lazy"><div class="video-play">&#9654;</div></div>' +
+    '<div class="video-info"><span class="video-title">Der Tisch</span><span class="video-meta">Installation &mdash; 2025</span></div></div>' +
+    '<div class="video-card" onclick="event.stopPropagation();openVideoModal(\'PHEDcexqu8k\', \'SAMAR Experience\', \'Installationen — Schweiz 2025\', \'Rigolo Tanztheater, Lokremise Wil.\')">' +
+    '<div class="video-thumb"><img src="https://img.youtube.com/vi/PHEDcexqu8k/mqdefault.jpg" alt="SAMAR" loading="lazy"><div class="video-play">&#9654;</div></div>' +
+    '<div class="video-info"><span class="video-title">SAMAR Experience</span><span class="video-meta">Installationen &mdash; Schweiz 2025</span></div></div>' +
+    '</div>';
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function openZeitreiseModal() {
+  var body = document.getElementById('modalBody');
+  body.innerHTML =
+    '<div class="teleskop-gallery" style="margin-bottom:1.5rem;">' +
+    buildThumbGrid([
+      'img/zeitreise-326.jpg','img/zeitreise-475.jpg','img/zeitreise-395.jpg',
+      'img/zeitreise-443.jpg','img/zeitreise-466.jpg'
+    ]) +
+    '</div>' +
+    '<h2 class="modal-title">Zeitreise in die 90er</h2>' +
+    '<div class="modal-meta">Interaktiver Screen &middot; Stadtgeschichtliches Museum Leipzig &middot; 2025</div>' +
+    '<p class="modal-desc">Interaktive Medienstation f&uuml;r die Ausstellung &bdquo;Zwischen Aufbruch und Abwicklung. Die 90er in Leipzig.&ldquo; Ein Touchscreen-Kiosk im Retro-Look &ndash; gr&uuml;ner Monochrom-Bildschirm, Pixel-Typografie &ndash; l&auml;dt Besucher:innen ein, sich durch Podcasts, Reels und Fotostrecken zu navigieren. Jugendliche von heute begegnen Jugendlichen von damals.</p>' +
+    '<a href="https://www.stadtgeschichtliches-museum-leipzig.de/ausstellungen/die-90er-in-leipzig/zeitreise-in-die-90er/" target="_blank" class="modal-link" style="margin-top:1rem;">Zur Ausstellung</a>';
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function buildThumbGrid(imgs) {
+  var html = '';
+  imgs.forEach(function(src) {
+    html += '<div class="teleskop-thumb-wrap">' +
+      '<img src="' + src + '" class="teleskop-thumb" onclick="teleskopSelect(this)" style="border-radius:4px;width:100%;height:100px;object-fit:cover;cursor:pointer;opacity:0.6;transition:all 0.4s ease;">' +
+      '</div>';
+  });
+  return '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;align-items:start;">' + html + '</div>';
+}
+
+function teleskopSelect(thumb) {
+  var gallery = thumb.closest('.teleskop-gallery');
+  var wasActive = thumb.classList.contains('active');
+
+  // Close all
+  gallery.querySelectorAll('.teleskop-thumb').forEach(function(t) {
+    t.style.height = '100px';
+    t.style.objectFit = 'cover';
+    t.style.opacity = '0.6';
+    t.classList.remove('active');
+  });
+
+  if (!wasActive) {
+    thumb.style.height = 'auto';
+    thumb.style.objectFit = 'contain';
+    thumb.style.opacity = '1';
+    thumb.classList.add('active');
+  }
+}
+
+function openTeleskopModal() {
+  var body = document.getElementById('modalBody');
+  body.innerHTML =
+    '<div class="teleskop-gallery" style="margin-bottom:1.5rem;">' +
+    buildThumbGrid([
+      'img/teleskopradius.jpg','img/teleskop-166.jpg','img/teleskop-240.jpg',
+      'img/teleskop-050.jpg','img/teleskop-344.jpg','img/teleskop-300.jpg','img/teleskop-388.jpg'
+    ]) +
+    '</div>' +
+    '<h2 class="modal-title">TELESKOPradius</h2>' +
+    '<div class="modal-meta">Performance &middot; UT Connewitz Leipzig &middot; 9. November 2025</div>' +
+    '<p class="modal-desc">Im Rahmen der TELESKOPradius-Reihe trafen experimentelle elektronische Musik und der GewandhausChor aufeinander. Philipp Rumsch komponierte ein Werk an der Schnittstelle von Avant-Pop, zeitgen&ouml;ssischer Klassik und Spatial Audio. Maxim M. Chubarov begleitete die Performance mit interaktiven, live-generierten Visuals &ndash; Projektionen, die auf Klang und Raum reagierten und das UT Connewitz in eine immersive B&uuml;hne verwandelten.</p>' +
+    '<div class="modal-meta" style="margin-top:0.8rem;font-size:0.8rem;">Fotos: Nikolas Fabian Kammerer</div>' +
+    '<a href="https://www.teleskopmusikproduktion.de/radius/" target="_blank" class="modal-link" style="margin-top:1rem;">teleskopmusikproduktion.de</a>';
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function openPpfModal() {
+  var body = document.getElementById('modalBody');
+  body.innerHTML =
+    '<h2 class="modal-title">past present future Magazin</h2>' +
+    '<div class="modal-meta">Die kollektive Raum-Zeit-Verschiebung &middot; 2024</div>' +
+    '<p class="modal-desc">Text: Nastassja von der Weiden &middot; Fotos: Anna Luisa Richter</p>' +
+    '<div style="display:flex;flex-direction:column;gap:0;">' +
+    '<img src="img/ppf-1.jpg" style="width:100%;border-radius:6px 6px 0 0;">' +
+    '<img src="img/ppf-2.jpg" style="width:100%;">' +
+    '<img src="img/ppf-3.jpg" style="width:100%;">' +
+    '<img src="img/ppf-4.jpg" style="width:100%;border-radius:0 0 6px 6px;">' +
+    '</div>';
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function openMdrModal() {
+  var body = document.getElementById('modalBody');
+  body.innerHTML =
+    '<h2 class="modal-title">MDR Kultur</h2>' +
+    '<div class="modal-meta">Lichtkunst als Philosophie: Das Leipziger K&uuml;nstlerkollektiv Wert &middot; 07.09.2021</div>' +
+    '<p class="modal-desc">Von Melanie Piroschik. &bdquo;Ein Rausch aus Farben, futuristisches Leuchten, subtile Details &ndash; das K&uuml;nstlerkollektiv Wert aus Leipzig gestaltet R&auml;ume mit Licht.&ldquo;</p>' +
+    '<div style="display:flex;flex-direction:column;gap:0;">' +
+    '<img src="img/mdr-1.jpg" style="width:100%;border-radius:6px 6px 0 0;">' +
+    '<img src="img/mdr-2.jpg" style="width:100%;">' +
+    '<img src="img/mdr-3.jpg" style="width:100%;border-radius:0 0 6px 6px;">' +
+    '</div>';
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function openContactModal() {
+  var body = document.getElementById('modalBody');
+  body.innerHTML =
+    '<h2 class="modal-title">Kontakt</h2>' +
+    '<form class="contact-form" id="contactForm" onsubmit="submitContact(event)">' +
+    '<input type="hidden" name="form-name" value="contact">' +
+    '<div class="form-group"><label for="c-name">Name</label><input type="text" id="c-name" name="name" required></div>' +
+    '<div class="form-group"><label for="c-email">E-Mail</label><input type="email" id="c-email" name="email" required></div>' +
+    '<div class="form-group"><label for="c-betreff">Betreff</label><input type="text" id="c-betreff" name="betreff"></div>' +
+    '<div class="form-group"><label for="c-nachricht">Nachricht</label><textarea id="c-nachricht" name="message" required></textarea></div>' +
+    '<button type="submit" class="form-submit">Absenden</button>' +
+    '</form>';
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function submitContact(e) {
+  e.preventDefault();
+  var form = document.getElementById('contactForm');
+  var data = new FormData(form);
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString()
+  }).then(function() {
+    document.getElementById('modalBody').innerHTML =
+      '<h2 class="modal-title">Danke!</h2>' +
+      '<p class="modal-desc">Deine Nachricht ist angekommen. Ich melde mich bald.</p>';
+  }).catch(function() {
+    document.getElementById('modalBody').innerHTML =
+      '<h2 class="modal-title">Fehler</h2>' +
+      '<p class="modal-desc">Etwas ist schiefgelaufen. Bitte versuch es sp&auml;ter nochmal.</p>';
+  });
+}
+
+function openLinksModal() {
+  var body = document.getElementById('modalBody');
+  body.innerHTML =
+    '<h2 class="modal-title">Links</h2>' +
+    '<ul class="weitere-list">' +
+    '<li class="weitere-item"><div><div class="weitere-name"><a href="https://wasistwert.info" target="_blank" style="color:inherit;border-bottom:1px solid var(--dim);">wasistwert.info</a></div><div class="weitere-desc">Kollektiv WERT</div></div></li>' +
+    '<li class="weitere-item"><div><div class="weitere-name"><a href="https://cafelit.de" target="_blank" style="color:inherit;border-bottom:1px solid var(--dim);">cafelit.de</a></div><div class="weitere-desc">Caf&eacute; Lit &ndash; Literaturplattform</div></div></li>' +
+    '<li class="weitere-item"><div><div class="weitere-name"><a href="https://meine-eisi.de" target="_blank" style="color:inherit;border-bottom:1px solid var(--dim);">meine-eisi.de</a></div><div class="weitere-desc">Meine Eisi &ndash; Eisenbahnstra&szlig;e Leipzig</div></div></li>' +
+    '<li class="weitere-item"><div><div class="weitere-name"><a href="http://exe.network" target="_blank" style="color:inherit;border-bottom:1px solid var(--dim);">exe.network</a></div><div class="weitere-desc">K&uuml;nstler:innen Plattform</div></div></li>' +
+    '<li class="weitere-item"><div><div class="weitere-name"><a href="https://hitness.club" target="_blank" style="color:inherit;border-bottom:1px solid var(--dim);">hitness.club</a></div><div class="weitere-desc">Audiovisuelle Bildung &amp; Konzertlocation</div></div></li>' +
+    '</ul>';
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function openImpressumModal() {
+  var body = document.getElementById('modalBody');
+  body.innerHTML =
+    '<h2 class="modal-title">Impressum</h2>' +
+    '<div class="modal-meta">Angaben gem&auml;&szlig; &sect; 5 TMG</div>' +
+    '<p class="modal-desc"><strong>Maxim M. Chubarov</strong><br>Leipzig, Deutschland</p>' +
+    '<div class="modal-meta" style="margin-top:1rem;">Kontakt</div>' +
+    '<p class="modal-desc"><a href="#" onclick="event.preventDefault();this.textContent=\'maxim@wasistwert.info\'" style="color:var(--accent-gold);border-bottom:1px solid var(--accent-gold);">E-Mail anzeigen</a></p>' +
+    '<div class="modal-meta" style="margin-top:1rem;">Haftungsausschluss</div>' +
+    '<p style="font-size:0.9rem;color:var(--muted);line-height:1.6;">Die Inhalte dieser Seite wurden mit gr&ouml;&szlig;ter Sorgfalt erstellt. F&uuml;r die Richtigkeit, Vollst&auml;ndigkeit und Aktualit&auml;t der Inhalte kann jedoch keine Gew&auml;hr &uuml;bernommen werden. Als Diensteanbieter bin ich gem&auml;&szlig; &sect; 7 Abs.1 TMG f&uuml;r eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Gem&auml;&szlig; &sect;&sect; 8 bis 10 TMG bin ich als Diensteanbieter jedoch nicht verpflichtet, &uuml;bermittelte oder gespeicherte fremde Informationen zu &uuml;berwachen.</p>';
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function openBerichteModal() {
+  var body = document.getElementById('modalBody');
+  body.innerHTML =
+    '<h2 class="modal-title">Berichte</h2>' +
+    '<div class="modal-meta">Kurztext &amp; Eckdaten</div>' +
+    '<p class="modal-desc"><strong>Kollektiv WERT</strong> ist ein zeitbasierter Zusammenschluss von K&uuml;nstler:innen verschiedenster Bereiche. Seit 2020 er&ouml;ffnet das Kollektiv j&auml;hrlich einen interdisziplin&auml;ren Projektzeitraum in Leipzig &mdash; einen Raum f&uuml;r Begegnung, Experiment und Diskurs.</p>' +
+    '<p class="modal-desc">Jeder Zyklus verdichtet sich zu einem Begriff: Was ist WERT? (2020), Resonanz (2021), con:sens (2022), Synergie (2023), Paradigma (2024), SHiFT (2025), SPEKTRUM (2026).</p>' +
+    '<div class="modal-meta" style="margin-top:1.5rem;">Berichte &amp; Erw&auml;hnungen</div>' +
+    '<ul class="weitere-list" style="margin-bottom:1.5rem;">' +
+    '<li class="weitere-item"><div><div class="weitere-name"><a href=\"#\" onclick=\"event.preventDefault();event.stopPropagation();openMdrModal()\" style=\"color:inherit;border-bottom:1px solid var(--dim);\">MDR Kultur</a></div><div class="weitere-desc">Lichtkunst als Philosophie: Das Leipziger K&uuml;nstlerkollektiv Wert</div></div><div class=\"weitere-meta\">2021</div></li>' +
+    '<li class="weitere-item"><div><div class="weitere-name"><a href="https://soundcloud.com/kollektiv-wert/radio-blau-aktuell-interview-maxim-m-chubarov-x-jolon-dixon" target="_blank" style="color:inherit;border-bottom:1px solid var(--dim);">Radio Blau</a></div><div class="weitere-desc">Interview mit Maxim M. Chubarov &amp; Jolon Dixon</div></div><div class="weitere-meta">2022</div></li>' +
+    '<li class="weitere-item"><div><div class="weitere-name"><a href=\"#\" onclick=\"event.preventDefault();event.stopPropagation();openPpfModal()\" style=\"color:inherit;border-bottom:1px solid var(--dim);\">past present future Magazin</a></div><div class="weitere-desc">Die kollektive Raum-Zeit-Verschiebung</div></div><div class=\"weitere-meta\">2024</div></li>' +
+    '<li class="weitere-item"><div><div class="weitere-name"><a href="https://www.frohfroh.de/35849/wert-kollektiv-jahrderresonanz-in-der-galerie-kub" target="_blank" style="color:inherit;border-bottom:1px solid var(--dim);">FrohFroh Magazin</a></div><div class="weitere-desc">WERT-Kollektiv &ndash; #JahrderResonanz in der Galerie KUB</div></div><div class="weitere-meta">2021</div></li>' +
+    '<li class="weitere-item"><div><div class="weitere-name"><a href="https://www.faz.net/aktuell/feuilleton/medien-und-film/neue-literatursendung-im-netz-cafe-lit-19583522.html" target="_blank" style="color:inherit;border-bottom:1px solid var(--dim);">FAZ</a></div><div class="weitere-desc">Neue Literatursendung im Netz &ndash; Caf&eacute; Lit</div></div><div class="weitere-meta">2024</div></li>' +
+    '<li class="weitere-item"><div><div class="weitere-name"><a href="https://www.deutschlandfunkkultur.de/neue-literaturformate-caf-lit-und-longreads-dlf-kultur-0450660a-100.html" target="_blank" style="color:inherit;border-bottom:1px solid var(--dim);">Deutschlandfunk Kultur</a></div><div class="weitere-desc">Neue Literaturformate &ndash; Caf&eacute; Lit und Longreads</div></div><div class="weitere-meta">2024</div></li>' +
+    '</ul>' +
+    '<div class="modal-meta" style="margin-top:1rem;">Eckdaten</div>' +
+    '<table style="width:100%;font-size:0.95rem;margin-top:0.5rem;">' +
+    '<tr><td style="color:var(--muted);padding:0.4rem 1.5rem 0.4rem 0;border-bottom:1px solid var(--dim);white-space:nowrap;">Gr&uuml;ndung</td><td style="padding:0.4rem 0;border-bottom:1px solid var(--dim);">2018 / erster Zyklus 2020</td></tr>' +
+    '<tr><td style="color:var(--muted);padding:0.4rem 1.5rem 0.4rem 0;border-bottom:1px solid var(--dim);">Ort</td><td style="padding:0.4rem 0;border-bottom:1px solid var(--dim);">Leipzig (Galerie KUB 2020&ndash;2024, ZiMMT ab 2025)</td></tr>' +
+    '<tr><td style="color:var(--muted);padding:0.4rem 1.5rem 0.4rem 0;border-bottom:1px solid var(--dim);">Formate</td><td style="padding:0.4rem 0;border-bottom:1px solid var(--dim);">Installationen, Performances, immersive Happenings, Workshops</td></tr>' +
+    '<tr><td style="color:var(--muted);padding:0.4rem 1.5rem 0.4rem 0;border-bottom:1px solid var(--dim);">Beteiligte</td><td style="padding:0.4rem 0;border-bottom:1px solid var(--dim);">Wechselndes Netzwerk von 9+ K&uuml;nstler:innen</td></tr>' +
+    '<tr><td style="color:var(--muted);padding:0.4rem 1.5rem 0.4rem 0;">Aktuell</td><td style="padding:0.4rem 0;">SPEKTRUM 2026 &middot; 17.&ndash;23. August &middot; ZiMMT Leipzig</td></tr>' +
+    '</table>' +
+    '<p style="font-size:0.9rem;color:var(--muted);margin-top:1.5rem;font-style:italic;">F&uuml;r Presseanfragen und Bildmaterial bitte den Kontakt-Button nutzen.</p>';
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+/* ========== INTERSECTION OBSERVER ========== */
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-in').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+
+/* ========== PARALLAX FOR SHOWCASE ========== */
+(function() {
+  var showcaseItems = document.querySelectorAll('.showcase-item[data-parallax]');
+  if (!showcaseItems.length) return;
+
+  function onScroll() {
+    var scrollY = window.pageYOffset;
+    showcaseItems.forEach(function(item) {
+      var rect = item.getBoundingClientRect();
+      var img = item.querySelector('img');
+      if (!img) return;
+      // Only apply when in viewport range
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        var offset = (rect.top / window.innerHeight - 0.5) * -40;
+        img.style.transform = 'translateY(' + offset + 'px)';
+      }
+    });
+  }
+
+  // Also parallax the hero bg
+  var heroBg = document.querySelector('.hero-bg img');
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        if (heroBg) {
+          var scrollY = window.pageYOffset;
+          var maxShift = window.innerHeight * 0.15;
+          var shift = Math.min(scrollY * 0.2, maxShift);
+          heroBg.style.transform = 'translateY(calc(-15% + ' + shift + 'px))';
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+/* ========== SHOWCASE SLIDESHOW ========== */
+(function() {
+  var items = document.querySelectorAll('.showcase-item[data-slides]');
+  items.forEach(function(item, i) {
+    var slides = item.dataset.slides.split(',');
+    if (slides.length < 2) return;
+    var img = item.querySelector('img');
+    var idx = 0;
+
+    // Each item starts at a different offset so they don't change together
+    var interval = 9000 + i * 3000;
+    var delay = 4000 + i * 5000;
+
+    // Preload all slides
+    slides.forEach(function(src) { var i = new Image(); i.src = src; });
+
+    setTimeout(function() {
+      setInterval(function() {
+        var nextIdx = (idx + 1) % slides.length;
+        var preload = new Image();
+        preload.src = slides[nextIdx];
+        preload.onload = function() {
+          img.classList.add('slide-out');
+          setTimeout(function() {
+            idx = nextIdx;
+            img.src = slides[idx];
+            setTimeout(function() {
+              img.classList.remove('slide-out');
+            }, 50);
+          }, 1500);
+        };
+      }, interval);
+    }, delay);
+  });
+})();
+</script>
+
+</body>
+</html>

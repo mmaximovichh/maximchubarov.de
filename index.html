@@ -2003,7 +2003,7 @@ if (localStorage.getItem('darkmode') === '1') {
     var driftX = (Math.random() - 0.5) * 60;
     var driftY = (Math.random() - 0.5) * 40;
     var size = 0.7 + Math.random() * 0.4;
-    var dur = 12 + Math.random() * 16;
+    var dur = 18 + Math.random() * 22;
 
     el.style.cssText =
       'left:' + startX + '%;' +
@@ -2023,43 +2023,15 @@ if (localStorage.getItem('darkmode') === '1') {
     setTimeout(function() { el.remove(); }, dur * 1000);
   }
 
-  // Initial burst — more visible, staggered entrance
-  begriffe.forEach(function(entry, i) {
-    setTimeout(function() {
-      var el = document.createElement('span');
-      el.className = 'global-word';
-      el.textContent = entry.text;
-      el.dataset.polarity = entry.pol;
-
-      var startX = 8 + (i % 4) * 22 + Math.random() * 10;
-      var startY = 15 + Math.floor(i / 4) * 25 + Math.random() * 10;
-      var driftX = (Math.random() - 0.5) * 80;
-      var driftY = (Math.random() - 0.5) * 50;
-      var size = 0.8 + Math.random() * 0.5;
-      var dur = 16 + Math.random() * 12;
-
-      el.style.cssText =
-        'left:' + startX + '%;' +
-        'top:' + startY + '%;' +
-        'font-size:' + size + 'rem;' +
-        'color:var(--muted);';
-
-      el.dataset.baseOpacity = '0.6';
-      el.animate([
-        { opacity: 0, transform: 'translate(0, 0)' },
-        { opacity: 0.65, offset: 0.1 },
-        { opacity: 0.6, offset: 0.4 },
-        { opacity: 0.35, offset: 0.8 },
-        { opacity: 0, transform: 'translate(' + driftX + 'px, ' + driftY + 'px)' }
-      ], { duration: dur * 1000, easing: 'ease-in-out' });
-
-      container.appendChild(el);
-      setTimeout(function() { el.remove(); }, dur * 1000);
-    }, i * 400);
-  });
-
-  // Then keep spawning subtler ones
-  setTimeout(function() { setInterval(spawnWord, 5000); }, 6000);
+  // Steady stream — spawn first 6 quickly, then continuously
+  var maxVisible = 8;
+  for (var i = 0; i < 6; i++) {
+    setTimeout(spawnWord, i * 1500);
+  }
+  setInterval(function() {
+    var current = container.querySelectorAll('.global-word').length;
+    if (current < maxVisible) spawnWord();
+  }, 3000);
 
   // Scroll moves begriffe with the page (since container is fixed)
   var lastScrollY = window.pageYOffset;

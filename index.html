@@ -1380,7 +1380,7 @@ img[src*="teleskop-318"] {
         <div class="accordion-content">
 
           <!-- Projekte -->
-          <div class="project-card compact fade-in" onclick="openProjectModal({title:'Caf&eacute; Lit', meta:'Plattform &middot; seit 2024 &middot; Creative Producer', desc:'Literaturplattform initiiert gemeinsam mit Insa Wilke.', img:'img/cafelit.jpg', link:'https://cafelit.de'})">
+          <div class="project-card compact fade-in" onclick="openProjectModal({title:'Caf&eacute; Lit', meta:'Plattform &middot; seit 2024 &middot; Creative Producer', desc:'Literaturplattform initiiert gemeinsam mit Insa Wilke.', img:'img/cafelit.jpg', imgs:['img/cafelit.jpg','img/cafelit-2.jpg','img/cafelit-3.jpg'], link:'https://cafelit.de'})">
             <div class="project-img-wrap">
               <img src="img/cafelit.jpg" alt="Café Lit" loading="lazy">
             </div>
@@ -2220,9 +2220,9 @@ function openProjectModal(data) {
   var body = document.getElementById('modalBody');
   var modal = document.getElementById('modalContent');
   var html = '';
-  var isMobile = window.innerWidth < 900;
+  var isMobile = window.innerWidth < 900 || ('ontouchstart' in window && window.innerWidth < 1200);
   var imgs = data.imgs || (data.img ? [data.img] : []);
-  if (isMobile) {
+  if (isMobile || (imgs.length > 1 && !data.link)) {
     if (imgs.length > 1) {
       html += '<div class="modal-gallery" id="modalGallery">';
       html += '<div class="modal-gallery-track" id="modalGalleryTrack" style="display:flex;transition:transform 0.3s ease;">';
@@ -2259,7 +2259,7 @@ function openProjectModal(data) {
   document.body.style.overflow = 'hidden';
   // Init swipe for gallery
   _modalGIdx = 0;
-  if (isMobile && imgs.length > 1) {
+  if (imgs.length > 1) {
     setTimeout(function() { initModalSwipe(imgs.length); }, 50);
   }
 }
@@ -2407,6 +2407,17 @@ function teleskopSelect(thumb) {
 }
 
 function openTeleskopModal() {
+  var isMobile = window.innerWidth < 900;
+  if (isMobile) {
+    openProjectModal({
+      title: 'TELESKOPradius',
+      meta: 'Performance \u00b7 UT Connewitz Leipzig \u00b7 9. November 2025',
+      desc: 'Experimentelle elektronische Musik und der GewandhausChor. Philipp Rumsch komponierte ein Werk an der Schnittstelle von Avant-Pop, zeitgen\u00f6ssischer Klassik und Spatial Audio. Maxim M. Chubarov begleitete die Performance mit interaktiven, live-generierten Visuals. Fotos: Nikolas Fabian Kammerer.',
+      imgs: ['img/teleskopradius.jpg','img/teleskop-166.jpg','img/teleskop-240.jpg','img/teleskop-050.jpg','img/teleskop-344.jpg','img/teleskop-300.jpg','img/teleskop-388.jpg'],
+      link: 'https://www.teleskopmusikproduktion.de/radius/'
+    });
+    return;
+  }
   var body = document.getElementById('modalBody');
   body.innerHTML =
     '<div class="teleskop-gallery" style="margin-bottom:1.5rem;">' +

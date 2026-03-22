@@ -2360,6 +2360,17 @@ function openTischModal() {
 }
 
 function openZeitreiseModal() {
+  var isMobile = window.innerWidth < 900 || ('ontouchstart' in window && window.innerWidth < 1200);
+  if (isMobile) {
+    openProjectModal({
+      title: 'Zeitreise in die 90er',
+      meta: 'Interaktiver Screen \u00b7 Stadtgeschichtliches Museum Leipzig \u00b7 2025',
+      desc: 'Interaktive Medienstation f\u00fcr die Ausstellung \u201eZwischen Aufbruch und Abwicklung. Die 90er in Leipzig.\u201c Ein Touchscreen-Kiosk im Retro-Look l\u00e4dt Besucher:innen ein, sich durch Podcasts, Reels und Fotostrecken zu navigieren.',
+      imgs: ['img/zeitreise-326.jpg','img/zeitreise-475.jpg','img/zeitreise-395.jpg','img/zeitreise-443.jpg','img/zeitreise-466.jpg'],
+      link: 'https://www.stadtgeschichtliches-museum-leipzig.de/ausstellungen/die-90er-in-leipzig/zeitreise-in-die-90er/'
+    });
+    return;
+  }
   var body = document.getElementById('modalBody');
   body.innerHTML =
     '<div class="teleskop-gallery" style="margin-bottom:1.5rem;">' +

@@ -2258,7 +2258,10 @@ function openProjectModal(data) {
   document.getElementById('modal').classList.add('active');
   document.body.style.overflow = 'hidden';
   // Init swipe for gallery
-  if (isMobile && imgs.length > 1) { initModalSwipe(imgs.length); }
+  _modalGIdx = 0;
+  if (isMobile && imgs.length > 1) {
+    setTimeout(function() { initModalSwipe(imgs.length); }, 50);
+  }
 }
 
 var _modalGIdx = 0;
@@ -2274,15 +2277,45 @@ function modalGalleryGo(idx) {
 function initModalSwipe(count) {
   var gallery = document.getElementById('modalGallery');
   if (!gallery) return;
-  var startX = 0, diff = 0;
-  gallery.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; });
-  gallery.addEventListener('touchmove', function(e) { diff = e.touches[0].clientX - startX; });
+  var startX = 0, startY = 0, diff = 0, isHorizontal = null;
+  gallery.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    diff = 0;
+    isHorizontal = null;
+  }, {passive: true});
+  gallery.addEventListener('touchmove', function(e) {
+    var dx = e.touches[0].clientX - startX;
+    var dy = e.touches[0].clientY - startY;
+    // Determine swipe direction on first significant move
+    if (isHorizontal === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+      isHorizontal = Math.abs(dx) > Math.abs(dy);
+    }
+    if (isHorizontal) {
+      e.preventDefault();
+      diff = dx;
+      // Live drag feedback
+      var track = document.getElementById('modalGalleryTrack');
+      if (track) {
+        var offset = -(_modalGIdx * 100);
+        var pxPercent = (diff / gallery.offsetWidth) * 100;
+        track.style.transition = 'none';
+        track.style.transform = 'translateX(' + (offset + pxPercent) + '%)';
+      }
+    }
+  }, {passive: false});
   gallery.addEventListener('touchend', function() {
-    if (Math.abs(diff) > 50) {
+    var track = document.getElementById('modalGalleryTrack');
+    if (track) track.style.transition = 'transform 0.3s ease';
+    if (isHorizontal && Math.abs(diff) > 40) {
       if (diff < 0 && _modalGIdx < count - 1) modalGalleryGo(_modalGIdx + 1);
       else if (diff > 0 && _modalGIdx > 0) modalGalleryGo(_modalGIdx - 1);
+      else modalGalleryGo(_modalGIdx);
+    } else {
+      modalGalleryGo(_modalGIdx);
     }
     diff = 0;
+    isHorizontal = null;
   });
 }
 

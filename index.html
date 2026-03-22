@@ -2208,17 +2208,25 @@ function openProjectModal(data) {
   var body = document.getElementById('modalBody');
   var modal = document.getElementById('modalContent');
   var html = '';
-  if (data.link) {
-    // Calculate scale so 1400px fits in modal width
-    var availWidth = Math.min(window.innerWidth * 0.95 - 80, 1400);
-    var scale = availWidth / 1400;
-    html += '<div class="modal-iframe-wrap" style="--iframe-scale:' + scale.toFixed(3) + ';">';
-    html += '<iframe class="modal-iframe" src="' + data.link + '" frameborder="0"></iframe>';
-    html += '</div>';
+  var isMobile = window.innerWidth < 900;
+  if (isMobile) {
+    if (data.img) html += '<img src="' + data.img + '" alt="' + data.title + '" class="modal-img">';
+    html += '<h2 class="modal-title">' + data.title + '</h2>';
+    html += '<div class="modal-meta">' + data.meta + '</div>';
+    if (data.desc) html += '<p class="modal-desc">' + data.desc + '</p>';
+    if (data.link) html += '<a href="' + data.link + '" target="_blank" class="modal-link">Projekt ansehen</a>';
+  } else {
+    if (data.link) {
+      var availWidth = Math.min(window.innerWidth * 0.95 - 80, 1400);
+      var scale = availWidth / 1400;
+      html += '<div class="modal-iframe-wrap" style="--iframe-scale:' + scale.toFixed(3) + ';">';
+      html += '<iframe class="modal-iframe" src="' + data.link + '" frameborder="0"></iframe>';
+      html += '</div>';
+    }
+    html += '<h2 class="modal-title">' + data.title + '</h2>';
+    html += '<div class="modal-meta">' + data.meta + '</div>';
+    if (data.link) html += '<a href="' + data.link + '" target="_blank" class="modal-link">In neuem Tab &ouml;ffnen</a>';
   }
-  html += '<h2 class="modal-title">' + data.title + '</h2>';
-  html += '<div class="modal-meta">' + data.meta + '</div>';
-  if (data.link) html += '<a href="' + data.link + '" target="_blank" class="modal-link">In neuem Tab &ouml;ffnen</a>';
   body.innerHTML = html;
   document.getElementById('modal').classList.add('active');
   document.body.style.overflow = 'hidden';

@@ -2227,7 +2227,7 @@ function openProjectModal(data) {
       html += '<div class="modal-gallery" id="modalGallery">';
       html += '<div class="modal-gallery-track" id="modalGalleryTrack" style="display:flex;transition:transform 0.3s ease;">';
       imgs.forEach(function(src, i) {
-        html += '<img src="' + src + '" alt="' + data.title + ' ' + (i+1) + '" class="modal-img" style="min-width:100%;object-fit:cover;">';
+        html += '<img src="' + src + '" alt="' + data.title + ' ' + (i+1) + '" class="modal-img" style="min-width:100%;height:250px;object-fit:cover;">';
       });
       html += '</div>';
       html += '<div class="modal-gallery-dots" style="text-align:center;padding:0.8rem 0;">';

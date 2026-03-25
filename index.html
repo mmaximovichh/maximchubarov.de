@@ -1953,8 +1953,8 @@ function toggleDark() {
   btn.innerHTML = isDark ? '&#9788;' : '&#9790;';
   localStorage.setItem('darkmode', isDark ? '1' : '0');
 }
-// Restore preference
-if (localStorage.getItem('darkmode') === '1') {
+// Dark mode default — only switch to light if explicitly saved
+if (localStorage.getItem('darkmode') !== '0') {
   document.body.classList.add('dark');
   document.getElementById('darkToggle').innerHTML = '&#9788;';
 }

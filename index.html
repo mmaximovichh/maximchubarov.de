@@ -2353,7 +2353,9 @@ function openVideoModal(youtubeId, title, meta, desc) {
   document.body.style.overflow = 'hidden';
 }
 
+var modalReturnTo = null;
 function closeModal() {
+  if (modalReturnTo) { var back = modalReturnTo; modalReturnTo = null; back(); return; }
   document.getElementById('modal').classList.remove('active');
   document.body.style.overflow = '';
   // Stop any playing video or iframe
@@ -2467,12 +2469,13 @@ function openTeleskopModal() {
 }
 
 function openPpfModal() {
+  modalReturnTo = openBerichteModal;
   var body = document.getElementById('modalBody');
   body.innerHTML =
     '<h2 class="modal-title">past present future Magazin</h2>' +
     '<div class="modal-meta">Die kollektive Raum-Zeit-Verschiebung &middot; 2024</div>' +
     '<p class="modal-desc">Text: Nastassja von der Weiden &middot; Fotos: Anna Luisa Richter</p>' +
-    '<div style="display:flex;flex-direction:column;gap:0;max-width:640px;margin:1rem auto 0;">' +
+    '<div style="display:flex;flex-direction:column;gap:0;max-width:800px;margin:1rem auto 0;">' +
     '<img src="img/ppf-1.jpg" style="width:100%;border-radius:6px 6px 0 0;">' +
     '<img src="img/ppf-2.jpg" style="width:100%;">' +
     '<img src="img/ppf-3.jpg" style="width:100%;">' +
@@ -2483,12 +2486,13 @@ function openPpfModal() {
 }
 
 function openMdrModal() {
+  modalReturnTo = openBerichteModal;
   var body = document.getElementById('modalBody');
   body.innerHTML =
     '<h2 class="modal-title">MDR Kultur</h2>' +
     '<div class="modal-meta">Lichtkunst als Philosophie: Das Leipziger K&uuml;nstlerkollektiv Wert &middot; 07.09.2021</div>' +
     '<p class="modal-desc">Von Melanie Piroschik. &bdquo;Ein Rausch aus Farben, futuristisches Leuchten, subtile Details &ndash; das K&uuml;nstlerkollektiv Wert aus Leipzig gestaltet R&auml;ume mit Licht.&ldquo;</p>' +
-    '<div style="display:flex;flex-direction:column;gap:0;max-width:640px;margin:1rem auto 0;">' +
+    '<div style="display:flex;flex-direction:column;gap:0;max-width:800px;margin:1rem auto 0;">' +
     '<img src="img/mdr-1.jpg" style="width:100%;border-radius:6px 6px 0 0;">' +
     '<img src="img/mdr-2.jpg" style="width:100%;">' +
     '<img src="img/mdr-3.jpg" style="width:100%;border-radius:0 0 6px 6px;">' +
@@ -2562,6 +2566,7 @@ function openImpressumModal() {
 }
 
 function openBerichteModal() {
+  modalReturnTo = null;
   var body = document.getElementById('modalBody');
   body.innerHTML =
     '<h2 class="modal-title">Berichte</h2>' +

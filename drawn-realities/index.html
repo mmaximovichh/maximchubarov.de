@@ -31,6 +31,14 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(48px, 9vw, 
 nav { display: flex; flex-wrap: wrap; gap: 8px 22px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 12px; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); margin-top: -48px; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
 section { scroll-margin-top: 64px; }
+.progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--ink); transform-origin: left; transform: scaleX(0); }
+.hint { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 6;
+  font-family: var(--label); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); padding: 8px 16px; display: flex; align-items: center; gap: 10px; transition: opacity .4s; }
+.hint span { display: inline-block; animation: nudge 1.6s ease-in-out infinite; }
+.hint.weg { opacity: 0; pointer-events: none; }
+@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+@media (prefers-reduced-motion: reduce) { .hint span { animation: none; } }
 nav a { font-size: 14px; text-transform: uppercase; color: var(--ink); text-decoration: none; }
 nav a:hover, nav a:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
 a { color: var(--ink); }
@@ -78,7 +86,8 @@ footer { border-top: 1px solid var(--line); padding-top: 18px; display: flex; fl
   <h1>Drawn Realities</h1>
   <p class="logline">Over two months, the painter Merlin Rainer and concept artist Maxim M. Chubarov work with partners on site to find out how a drawn world becomes a room that responds to bodies, sound and the people in it.</p>
 </header>
-<nav aria-label="Sections"><a href="#project">Project</a><a href="#images">Images</a><a href="#timeline">Timeline</a><a href="#tech">Tech rider</a><a href="#people">CVs</a></nav>
+<nav aria-label="Sections"><a href="#project">Project</a><a href="#images">Images</a><a href="#timeline">Timeline</a><a href="#tech">Tech rider</a><a href="#people">CVs</a><span class="progress" aria-hidden="true"></span></nav>
+<a class="hint" href="#project">Scroll <span aria-hidden="true">↓</span></a>
 
 <figure class="hero"><img src="img/01_feldman_wall_portrait.jpg" alt="Merlin Rainer's wall drawing for Morton Feldman, built up in front of the camera. Nikolaisaal Potsdam, 2026." loading="lazy"><figcaption>Merlin Rainer's wall drawing for Morton Feldman, built up in front of the camera. Nikolaisaal Potsdam, 2026.</figcaption></figure>
 
@@ -279,6 +288,17 @@ footer { border-top: 1px solid var(--line); padding-top: 18px; display: flex; fl
   <div class="col"><p>Projects together: Resonanz (WERKSCHAU, Spinnerei Leipzig, 2021), Supermotte (culture.room Berlin, 2022), Metamorphose (Nikolaisaal Potsdam, with KAPmodern, 2023), Hidden Heroes (ZiMMT Leipzig, 2025), “… denn jeder ist die Welt” (Nikolaisaal Potsdam, with KAPmodern, 2026).</p></div>
 </section>
 
+<script>
+(function(){
+  var bar=document.querySelector('.progress'), hint=document.querySelector('.hint');
+  function f(){
+    var h=document.documentElement, max=h.scrollHeight-h.clientHeight, y=h.scrollTop||document.body.scrollTop;
+    if(bar) bar.style.transform='scaleX('+(max>0?Math.min(1,y/max):0)+')';
+    if(hint) hint.classList.toggle('weg', y>120);
+  }
+  addEventListener('scroll',f,{passive:true}); addEventListener('resize',f); f();
+})();
+</script>
 <footer class="meta"><span>Drawn Realities · EMAP residency 2027</span><a href="https://wasistwert.info">wasistwert.info</a><a href="https://maximchubarov.de">maximchubarov.de</a></footer>
 </div>
 </body></html>

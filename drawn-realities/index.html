@@ -59,6 +59,8 @@ html { scroll-behavior: smooth; }
 .loop { margin: 28px 0 0; display: grid; gap: 8px; }
 .loop video { width: 100%; height: auto; display: block; background: #000; }
 .loop figcaption { color: #c9cfdc; font-size: 13px; }
+.werk-link { font-family: var(--label); font-size: 13px; letter-spacing: .06em; color: var(--paper); text-decoration: none; border-bottom: 1px solid rgba(236,241,253,.4); justify-self: start; margin-top: 6px; padding-bottom: 2px; }
+.werk-link:hover, .werk-link:focus-visible { border-color: var(--paper); }
 .steuer { display: flex; align-items: center; gap: 18px; font-family: var(--label); color: #c9cfdc; }
 .steuer .zahl { font-size: 13px; letter-spacing: .14em; font-variant-numeric: tabular-nums; min-width: 72px; text-align: center; }
 .pfeil { background: none; border: 1px solid rgba(236,241,253,.28); color: var(--paper); width: 40px; height: 40px; border-radius: 50%; font-size: 16px; cursor: pointer; transition: border-color .2s, background .2s; }
@@ -137,7 +139,7 @@ footer { border-top: 1px solid var(--line); padding-top: 18px; display: flex; fl
     <figure class="loop"><video src="video/puzzle_wand.mp4" poster="video/puzzle_wand_poster.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>In the interval the audience assembled Merlin's double portrait of Feldman and Guston on the wall, sheet by sheet.</figcaption></figure>
   </div>
 </article><article class="werk" data-start="28" data-n="5">
-  <header class="werk-kopf"><span class="jahr">2026</span><h3>Naturklangkapelle Haynsburg</h3><p>Light installation · architecture Atelier ST</p></header>
+  <header class="werk-kopf"><span class="jahr">2026</span><h3>Naturklangkapelle Haynsburg</h3><p>Light installation · architecture Atelier ST</p><a class="werk-link" href="https://www.youtube.com/watch?v=UMrEXLx0Otc" target="_blank" rel="noopener">Watch the video ↗</a></header>
   <div class="werk-bilder">
     <button class="buehne" aria-label="Open Naturklangkapelle Haynsburg full screen"><img src="img/m/img_hq_img_haynsburg_139.jpg?v=1793957126" alt="Naturklangkapelle Haynsburg" loading="lazy" decoding="async"></button>
     <div class="steuer"><button class="pfeil" data-d="-1" aria-label="Previous image">←</button><span class="zahl"><span class="k">01</span> / 05</span><button class="pfeil" data-d="1" aria-label="Next image">→</button></div>

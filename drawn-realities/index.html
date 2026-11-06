@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Drawn Realities</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans+Condensed:wght@400;500&display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; }
+/* Layout: eine ruhige Mappe auf Merlins Papier, schmale Lesespalte, Bilder dürfen breiter. Bewusst nur ein Thema (Papier), Farben überall explizit. */
+:root {
+  --paper: #ecf1fd; --ink: #16171a; --graphite: #4b4f58; --line: #c9cfdc; --sheet: #f6f8fe;
+  --display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --body: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --label: "IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+html { background: var(--paper); }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 56px 96px; display: grid; gap: 72px; }
+.col { max-width: 680px; }
+header { display: grid; gap: 20px; }
+.eyebrow, h2, h4, figcaption, nav a, td.y, th, .meta { font-family: var(--label); letter-spacing: .06em; }
+.eyebrow { font-size: 13px; text-transform: uppercase; color: var(--graphite); }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(48px, 9vw, 104px); line-height: .95; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.logline { font-size: 22px; line-height: 1.45; max-width: 760px; margin: 0; text-wrap: pretty; }
+nav { display: flex; flex-wrap: wrap; gap: 8px 22px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 12px; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); margin-top: -48px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+section { scroll-margin-top: 64px; }
+nav a { font-size: 14px; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+nav a:hover, nav a:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
+a { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+figure { margin: 0; display: grid; gap: 8px; }
+figure img { width: 100%; height: auto; display: block; background: var(--sheet); }
+figcaption { font-size: 13px; color: var(--graphite); max-width: 640px; }
+.hero img { max-height: 78vh; object-fit: cover; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px; }
+.grid figure:first-child { grid-column: 1 / -1; }
+section { display: grid; gap: 18px; }
+h2 { font-size: 13px; text-transform: uppercase; font-weight: 500; color: var(--graphite); margin: 28px 0 0; }
+section > h2:first-child, .col > h2:first-child { margin-top: 0; }
+h3 { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1.1; margin: 0; text-wrap: balance; }
+h4 { font-size: 12px; text-transform: uppercase; font-weight: 500; color: var(--graphite); margin: 22px 0 8px; }
+p { margin: 0 0 14px; text-wrap: pretty; }
+ol, ul { margin: 0 0 14px; padding-left: 24px; } li { margin-bottom: 6px; }
+.host b, .weeks b { font-family: var(--label); font-weight: 500; font-size: 15px; letter-spacing: .03em; }
+.scroll { overflow-x: auto; background: var(--sheet); border: 1px solid var(--line); padding: 20px; }
+.scroll svg { min-width: 640px; width: 100%; height: auto; display: block; }
+table { border-collapse: collapse; width: 100%; font-size: 16px; }
+td, th { text-align: left; vertical-align: top; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); }
+th { font-size: 14px; font-weight: 500; width: 30%; }
+td.y { width: 96px; font-size: 13px; color: var(--graphite); white-space: nowrap; }
+td i, .cv i { font-style: italic; color: var(--graphite); }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 32px; }
+.cols h2 { margin-top: 0; }
+.people { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 48px; align-items: start; }
+.cv { font-size: 16px; }
+.cv table { font-size: 15px; }
+.note { font-size: 15px; color: var(--graphite); }
+.meta { font-size: 13px; color: var(--graphite); }
+footer { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+@media (max-width: 720px) {
+  body { font-size: 17px; }
+  .grid, .cols, .people { grid-template-columns: 1fr; }
+  .wrap { gap: 56px; padding-block: 32px 64px; }
+}
+</style>
+
+</head><body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Merlin Rainer and Maxim M. Chubarov · EMAP residency 2027 · Onassis Athens, werkleitz Halle, gnration Braga</div>
+  <h1>Drawn Realities</h1>
+  <p class="logline">Over two months, the painter Merlin Rainer and concept artist Maxim M. Chubarov work with partners on site to find out how a drawn world becomes a room that responds to bodies, sound and the people in it.</p>
+</header>
+<nav aria-label="Sections"><a href="#project">Project</a><a href="#images">Images</a><a href="#timeline">Timeline</a><a href="#tech">Tech rider</a><a href="#people">CVs</a></nav>
+
+<figure class="hero"><img src="img/01_feldman_wall_portrait.jpg" alt="Merlin Rainer's wall drawing for Morton Feldman, built up in front of the camera. Nikolaisaal Potsdam, 2026." loading="lazy"><figcaption>Merlin Rainer's wall drawing for Morton Feldman, built up in front of the camera. Nikolaisaal Potsdam, 2026.</figcaption></figure>
+
+<section id="project" class="col">
+<h2>An interval in Potsdam</h2>
+<p>On 28 October 2026 we presented “… denn jeder ist die Welt” (“… for everyone is the world”) with the ensemble KAPmodern of the Kammerakademie Potsdam at the Nikolaisaal Potsdam, an evening we had developed for and with them. On every seat lay a quarter sheet, a fragment of one large drawing by Merlin, and on the wall hung a grid of squares marked with letters. In the interval people queued to bring their sheet to the matching square, and by the end of the break the wall showed a double portrait of the composer Morton Feldman and the painter Philip Guston, whose friendship the evening had told in drawings. We had not expected the queues. People had followed the story through the first half, and in the interval they put its picture together.</p>
+
+<h2>The question</h2>
+<p>For the residency we bring one question: how does a drawn world become a room that responds to bodies, sound and the people in it? It holds at each of the hosts we have chosen, and it leaves room for what we find there. We take in impressions, stories and themes on site, in conversation with the host and with dramaturgs, musicians, performers or collectives. The thread and the frame of the piece we set ourselves.</p>
+
+<h2>How we work together</h2>
+<p>Merlin Rainer is a painter who is developing towards animated film. He draws real people and places in pencil, graphite and ink. Maxim M. Chubarov shares the research and the dramaturgy with him and develops the technology that extends these drawings into a room: projection onto the architecture, light, sound, tracking, live control, or an installation that visitors walk through. The room always grows out of Merlin's drawn world. We research the material together and develop it with the people we meet on site, and in the end with the audience.</p>
+<p>In Potsdam every image on the wall came from Merlin's hand. We developed the story of the evening together, and Maxim worked out how the drawings would respond during the concert. A camera followed the cellist, and Merlin's drawn measuring marks moved with her. His ink waves changed with the loudness of the music, picked up by microphones. The projection was mapped across the screen and the columns of the hall, and the lighting followed the running order. These moments are where our question comes from.</p>
+<p>Drawing gives us a lot of freedom. We can jump through time, place two biographies next to each other, explain what we have learned and let fantastic things happen. It also creates distance, and in our experience that distance gives people a way in, even to heavy subjects. With Feldman and Guston we chose to give an impression of their friendship and left many details out. Merlin's films show this too. In Upload DDR phone screenshots become graphite drawings. UP-TEMPO POLITICS draws the Hardtekk scene from real interviews with young people who are connected by the music while holding very different political views.</p>
+<p>Whether the room is immersive or interactive, or mainly gives information, depends on the material. The audience should always find an easy way in, and usually gets something to do.</p>
+
+<h2>Where our method comes from</h2>
+<p>We met in the artist collective WERT (German for “value”), which Maxim founded and whose method he developed together with its members. For seven years the collective ran self-organised residencies, one week in one place, each year around one term that every member tested in their own field. Every year added one more step. Together the seven steps describe how artistic value is created collectively, from the first question to the presentation, and we still work along them:</p>
+<ol>
+<li>What is value? (Was ist WERT?, 2020): deciding what deserves attention in a place, and for whom.</li>
+<li>Resonance (Resonanz, 2021): turning towards each other, the place, its projects and its people. Out of this response we find the right material, images and techniques.</li>
+<li>con:sens (with sense and with the senses, 2022): designing rooms from the material that make sense and appeal to the senses, and asking how technology can do both.</li>
+<li>Synergy (Synergie, 2023): connecting people, crafts, media and techniques so that the whole becomes more than its parts.</li>
+<li>Paradigm (Paradigma, 2024): finding the pattern in the material, the thread and the form of the story.</li>
+<li>SHiFT (2025): changing the perspective, questioning the point of view and testing how the work is received.</li>
+<li>Spectrum (Spektrum, 2026): opening the work up, showing and publishing it, built so that it can continue.</li>
+</ol>
+<p>In the residency, the first three steps belong to the research weeks, the next two to production, and the last two to the run-throughs and the presentation.</p>
+
+<h2>The residency</h2>
+<div class="weeks">
+<p>Before we arrive, we talk with the host and possible partners and ask where a collaboration could fit into their plans.</p>
+<p><b>Weeks 1–3:</b> research on site, with meetings, places and archives. Merlin draws what we find, and we run first tests in the venue. At the end of this phase we decide together on the subject and the thread.</p>
+<p><b>Weeks 4–6:</b> production. Merlin draws and animates the material by hand, Maxim extends it into the room, and local partners add their own work, whether writing, music or movement. We rehearse together.</p>
+<p><b>Week 7:</b> run-throughs with test audiences.</p>
+<p><b>Week 8:</b> presentation at the host venue, and documentation of drawings, setup and running order, so the piece can be shown again.</p>
+<p>If the host prefers, the residency can be split into three weeks of research and five weeks of production and presentation. In between, Merlin keeps drawing at home and Maxim prepares the technical setup.</p>
+</div>
+
+<h2>Athens, Halle, Braga</h2>
+<p>We would work the same way at each of them, but the form of the piece would depend on the place. What follows are possible starting points; the subject itself takes shape in the exchange on site.</p>
+<p class="host"><b>Onassis, Athens.</b> ONX is looking for digital work with analogue qualities and for stage experiments. Here we could begin with a stage prototype, developed with performers and dramaturgs from Athens, in which the drawn world reacts to bodies. We already work with camera-based tracking; the motion-capture stage and multichannel sound would take this further. Skēnographía, the word behind scenography, literally means painting the stage. Aristotle names Sophocles as the one who brought scene painting to the theatre, and Vitruvius tells of the painter Agatharchus making a scene in Athens for a tragedy by Aeschylus.</p>
+<p class="host"><b>werkleitz, Halle.</b> werkleitz works on social issues and shows media art in public space. In Halle we could take a drawn world out of the venue and into the city, where people come across it by chance, for example around the themes of Merlin's film Upload DDR, as an exhibition or an intervention developed with people from the region.</p>
+<p class="host"><b>gnration, Braga.</b> With musicians from Braga we could develop an audiovisual piece for the black box, in which drawing and sound respond to each other from the start. In Potsdam the music was given and the drawings followed it; in Braga both could grow together. gnration's partners, among them the University of Minho and local collectives, would help us find the people to work with.</p>
+
+<h2>What is new</h2>
+<p>“… denn jeder ist die Welt” is our current stage. There, our story was written around a music programme that was already set, the responsive moments were single scenes, and the setup was built for one hall. In the residency, responding to bodies, sound and people becomes part of the dramaturgy from the first day. Local partners shape the material with us as co-authors. And the result is a form that can be rebuilt in other theatres, halls and galleries and shown again.</p>
+
+
+</section>
+
+<section id="images">
+  <h2>Images · “… denn jeder ist die Welt”, Nikolaisaal Potsdam, 2026</h2>
+  <div class="grid"><figure class=""><img src="img/02_feldman_wall_growing.jpg" alt="The same wall while it grows: abstract marks before the faces appear." loading="lazy"><figcaption>The same wall while it grows: abstract marks before the faces appear.</figcaption></figure><figure class=""><img src="img/03_merlin_ink_script.jpg" alt="Merlin's hand-drawn ink alphabet, set as live text: “denn jeder ist die Welt”." loading="lazy"><figcaption>Merlin's hand-drawn ink alphabet, set as live text: “denn jeder ist die Welt”.</figcaption></figure><figure class=""><img src="img/04_merlin_ink_jeder_alle.jpg" alt="JEDER / ALLE: ink letters by Merlin, taken apart and rebuilt for the finale." loading="lazy"><figcaption>JEDER / ALLE: ink letters by Merlin, taken apart and rebuilt for the finale.</figcaption></figure><figure class=""><img src="img/05_chat_in_merlins_frame.jpg" alt="A conversation on the wall, written in Merlin's script inside his drawn interface." loading="lazy"><figcaption>A conversation on the wall, written in Merlin's script inside his drawn interface.</figcaption></figure></div>
+  <p class="note">All drawings, letters and frames by Merlin Rainer, drawn by hand in pencil, graphite and ink.</p>
+</section>
+
+<section id="timeline">
+  <h2>Timeline · two months</h2>
+  <div class="scroll"><svg viewBox="0 0 700 250" font-family="Helvetica Neue, Arial, sans-serif" font-size="11">
+  <g fill="#555" font-size="10">
+    <text x="20" y="18">before</text>
+    <text x="118" y="18">W1</text><text x="182" y="18">W2</text><text x="246" y="18">W3</text>
+    <text x="310" y="18">W4</text><text x="374" y="18">W5</text><text x="438" y="18">W6</text>
+    <text x="502" y="18">W7</text><text x="566" y="18">W8</text><text x="626" y="18">after</text>
+  </g>
+  <g stroke="#e3e3e3"><line x1="100" y1="26" x2="100" y2="160"/><line x1="164" y1="26" x2="164" y2="160"/><line x1="228" y1="26" x2="228" y2="160"/><line x1="292" y1="26" x2="292" y2="160"/><line x1="356" y1="26" x2="356" y2="160"/><line x1="420" y1="26" x2="420" y2="160"/><line x1="484" y1="26" x2="484" y2="160"/><line x1="548" y1="26" x2="548" y2="160"/><line x1="612" y1="26" x2="612" y2="160"/></g>
+  <rect x="8" y="34" width="88" height="26" rx="3" fill="#d9d9d9"/><text x="14" y="51" fill="#222">online meetings</text>
+  <rect x="102" y="70" width="188" height="26" rx="3" fill="#2f2f2f"/><text x="110" y="87" fill="#fff">Research on site · first tests</text>
+  <rect x="102" y="106" width="188" height="20" rx="3" fill="none" stroke="#2f2f2f" stroke-dasharray="3 2"/><text x="110" y="120" fill="#333" font-size="10">1–3: value, resonance, con:sens</text><text x="14" y="120" fill="#555" font-size="10">WERT steps</text>
+  <circle cx="290" cy="83" r="5" fill="#fff" stroke="#2f2f2f" stroke-width="2"/>
+  <line x1="290" y1="88" x2="290" y2="136" stroke="#999" stroke-dasharray="2 2"/><text x="222" y="150" fill="#333" font-size="10">subject and thread decided</text>
+  <rect x="294" y="70" width="188" height="26" rx="3" fill="#6b6b6b"/><text x="302" y="87" fill="#fff">Production · drawing, room</text>
+  <rect x="294" y="106" width="188" height="20" rx="3" fill="none" stroke="#6b6b6b" stroke-dasharray="3 2"/><text x="302" y="120" fill="#333" font-size="10">4–5: synergy, paradigm</text>
+  <rect x="486" y="70" width="60" height="26" rx="3" fill="#9a9a9a"/><text x="498" y="87" fill="#fff" font-size="10">test runs</text>
+  <rect x="550" y="70" width="60" height="26" rx="3" fill="#111"/><text x="564" y="87" fill="#fff" font-size="10">show</text>
+  <rect x="486" y="106" width="124" height="20" rx="3" fill="none" stroke="#111" stroke-dasharray="3 2"/><text x="492" y="120" fill="#333" font-size="10">6–7: SHiFT, spectrum</text>
+  <rect x="614" y="34" width="80" height="26" rx="3" fill="#d9d9d9"/><text x="620" y="51" fill="#222">documentation</text>
+  <text x="8" y="186" fill="#333" font-weight="600">Split option</text>
+  <rect x="102" y="194" width="188" height="22" rx="3" fill="#2f2f2f"/><text x="110" y="209" fill="#fff">3 weeks research</text>
+  <rect x="294" y="194" width="60" height="22" rx="3" fill="none" stroke="#aaa" stroke-dasharray="3 2"/><text x="302" y="209" fill="#666" font-size="10">break</text>
+  <rect x="358" y="194" width="252" height="22" rx="3" fill="#6b6b6b"/><text x="366" y="209" fill="#fff">5 weeks production, test runs, show</text>
+  <text x="102" y="238" fill="#555" font-size="10">In between, Merlin keeps drawing at home and Maxim prepares the technical setup.</text>
+</svg></div>
+</section>
+
+<section id="tech">
+  <h2>Tech rider</h2>
+  <div class="col"><p>Our setup is flexible and adapts to the room and to the subject we find on site. At its core there is almost always projection and light: Merlin's drawings projected onto a screen, walls, architecture or objects, and light that shapes the room around them. Sound and sensors are added as the piece needs them. The setup below is a reference, not a fixed requirement.</p></div>
+  <h4>Who does what</h4>
+  <table>
+<tr><th>Merlin Rainer</th><td>Research drawings on site. All images by hand in pencil, graphite and ink, scanned and animated by hand.</td></tr>
+<tr><th>Maxim M. Chubarov</th><td>Research and dramaturgy with Merlin, technical concept and show system: mapping, interaction, light, sound routing, running order, live operation.</td></tr>
+<tr><th>Local partners</th><td>Dramaturgs, performers, musicians, authors or a collective, found with the host. They bring their own material and shape the piece with us.</td></tr>
+<tr><th>Host team</th><td>Venue, rehearsal times, technical support, and where available motion capture and multichannel sound.</td></tr>
+</table>
+  <h4>Reference setup: “… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026</h4>
+  <div class="scroll"><svg viewBox="0 0 700 270" font-family="Helvetica Neue, Arial, sans-serif" font-size="11">
+  <defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#444"/></marker></defs>
+  <g stroke="#444" stroke-width="1.3" fill="none" marker-end="url(#a)">
+    <line x1="150" y1="60" x2="268" y2="110"/>
+    <line x1="150" y1="130" x2="268" y2="130"/>
+    <line x1="150" y1="200" x2="268" y2="152"/>
+    <line x1="430" y1="118" x2="528" y2="70"/>
+    <line x1="430" y1="140" x2="528" y2="140"/>
+  </g>
+  <g fill="#f2f2f2" stroke="#999">
+    <rect x="10" y="30" width="140" height="56" rx="4"/><rect x="10" y="104" width="140" height="56" rx="4"/><rect x="10" y="178" width="140" height="56" rx="4"/>
+    <rect x="270" y="90" width="160" height="80" rx="4" fill="#2f2f2f" stroke="#2f2f2f"/>
+    <rect x="530" y="40" width="160" height="56" rx="4"/><rect x="530" y="112" width="160" height="56" rx="4"/><rect x="530" y="188" width="160" height="56" rx="4" stroke-dasharray="3 2"/>
+  </g>
+  <g fill="#222">
+    <text x="20" y="52" font-weight="600">Control</text><text x="20" y="68" font-size="10">two laptops, Stream Deck,</text><text x="20" y="80" font-size="10">MIDI faders, phone</text>
+    <text x="20" y="126" font-weight="600">Sensors</text><text x="20" y="142" font-size="10">camera (body tracking),</text><text x="20" y="154" font-size="10">microphones (loudness)</text>
+    <text x="20" y="200" font-weight="600">Merlin's material</text><text x="20" y="216" font-size="10">scanned drawings,</text><text x="20" y="228" font-size="10">hand-animated sequences</text>
+    <text x="282" y="118" fill="#fff" font-weight="600">Show computer</text><text x="282" y="136" fill="#fff" font-size="10">browser-based show system,</text><text x="282" y="150" fill="#fff" font-size="10">mapping, masks, running order</text>
+    <text x="540" y="62" font-weight="600">Projector</text><text x="540" y="78" font-size="10">screen and five columns,</text><text x="540" y="90" font-size="10">mesh warping</text>
+    <text x="540" y="134" font-weight="600">Light</text><text x="540" y="150" font-size="10">LED bars over Bluetooth,</text><text x="540" y="162" font-size="10">cues follow the running order</text>
+    <text x="540" y="210" font-weight="600">Audience</text><text x="540" y="226" font-size="10">interval: portrait wall</text><text x="540" y="238" font-size="10">assembled by hand</text>
+  </g>
+  <text x="270" y="200" fill="#555" font-size="10">All devices on one local network.</text>
+  <text x="270" y="214" fill="#555" font-size="10">Several control stations can step in at any time.</text>
+</svg></div>
+  <div class="cols">
+<div>
+<h2>We bring</h2>
+<ul>
+<li>Our own show system (browser-based mapping, live control, tracking, audio analysis), adapted on site</li>
+<li>Laptops, Stream Deck, MIDI faders</li>
+<li>Camera and microphones for the responsive scenes</li>
+<li>Battery LED light bars for small spaces</li>
+<li>Paper, pencil, graphite and ink</li>
+</ul>
+</div>
+<div>
+<h2>We need from the host</h2>
+<ul>
+<li>A room that can be darkened, for research tests and the presentation</li>
+<li>One or two bright projectors (depending on the space)</li>
+<li>A sound system</li>
+<li>A scanner (A3 or larger) or a copy stand with camera</li>
+<li>Basic stage lighting and a stable local network</li>
+<li>Rehearsal time with local partners in weeks 4–7</li>
+</ul>
+</div>
+</div>
+  <div class="col"><h4>What we would like to learn</h4>
+<p>Motion capture and multichannel sound are new to us. Where a host offers them, as at Onassis, we would learn them with the host's team and connect them to the show system.</p>
+<p class="note">The final setup depends on the room and on the subject chosen on site.</p>
+</div>
+</section>
+
+<section id="people">
+  <h2>CVs</h2>
+  <div class="people">
+    <div class="cv"><h3>Merlin Rainer</h3><p>Merlin Rainer is a painter and a graduate of the Academy of Fine Arts Leipzig (HGB). His films Upload DDR and UP-TEMPO POLITICS take real, often politically charged subjects and make them accessible in a drawn world.</p><p class="note">Full CV to follow.</p></div>
+    <div class="cv"><h3>Maxim M. Chubarov</h3><p class="meta">Concept artist, filmmaker and curator · Leipzig</p>
+
+
+
+<p>Concept artist and creative producer. I develop, realise and document participatory and interactive art concepts: installations, performances and films that connect communities and open up creative processes. Founder and artistic director of the collective WERT since 2020.</p>
+
+<h4>Selected works</h4>
+<table>
+<tr><td class="y">2026</td><td>“… denn jeder ist die Welt”, Nikolaisaal Potsdam, with Merlin Rainer and KAPmodern (Kammerakademie Potsdam). <i>Concept, dramaturgy, show system, projection mapping, light</i></td></tr>
+<tr><td class="y">2026</td><td>Naturklangkapelle Haynsburg, light installation in a walk-in tower of black wooden slats (architecture: Atelier ST). The light moves with a composition playing in a loop. <i>Light concept and system</i></td></tr>
+<tr><td class="y">2026</td><td>Mehr WERT Festival, Matthäikirchhof Leipzig: six stations from six WERT cycles, objects, installations and texts. <i>Concept, with the collective WERT</i></td></tr>
+<tr><td class="y">2025</td><td>TELESKOPradius, UT Connewitz Leipzig, with the GewandhausChor: experimental music meets interactive visuals. <i>Interactive visuals</i></td></tr>
+<tr><td class="y">2025</td><td>Der Tisch, an interactive table installation, and SAMAR Experience, a performative installation with Rigolo Tanztheater (Switzerland). <i>Concept and production</i></td></tr>
+<tr><td class="y">2025</td><td>Zeitreise in die 90er, interactive media station for the exhibition “Zwischen Aufbruch und Abwicklung. Die 90er in Leipzig”, Stadtgeschichtliches Museum Leipzig</td></tr>
+<tr><td class="y">2024</td><td>Fragmente (PARADIGMA): 15 screens, each played by its own projector, a walk-in room of memories. <i>Concept and video</i></td></tr>
+<tr><td class="y">2023</td><td>Metamorphose, Nikolaisaal Potsdam, with Merlin Rainer and KAPmodern</td></tr>
+<tr><td class="y">2022</td><td>Sphären (con:sens): 36 inflatable balls, three metres in diameter, in public space in Leipzig</td></tr>
+<tr><td class="y">2022</td><td>MindCanvas (con:sens): immersive 360-degree projection that visitors act on directly. <i>Concept and production</i></td></tr>
+<tr><td class="y">2022</td><td>Supermotte, culture.room Berlin, with Merlin Rainer: live performance with painting, text and mapping</td></tr>
+<tr><td class="y">2021</td><td>Resonanz, WERKSCHAU Spinnerei Leipzig, with Merlin Rainer: painting, dance and music; Resonanz performance at the Gewandhaus Leipzig</td></tr>
+</table>
+
+<h4>Collective WERT (founder and artistic director)</h4>
+<p>Seven annual cycles, each around one term: Was ist WERT? (2020) · Resonanz (2021) · con:sens (2022) · Synergie (2023) · PARADIGMA (2024), all based at Galerie KUB Leipzig · SHiFT (2025) and SPEKTRUM (2026) at ZiMMT Leipzig. More than fifty productions.</p>
+
+<h4>Festivals and platforms</h4>
+<table>
+<tr><td class="y">since 2014</td><td>appletree garden festival, Diepholz, including the community space “Waldbad Oase”. <i>Design, installation, creative producer</i></td></tr>
+<tr><td class="y">2018–2024</td><td>TRIP Festival, audiovisual festival in Leipzig's club scene. <i>Design, installation, creative producer</i></td></tr>
+<tr><td class="y">since 2018</td><td>Synchronisation, collaborative experiment of artists at ZiMMT Leipzig, several editions. <i>Idea, creative producer</i></td></tr>
+<tr><td class="y">since 2020</td><td>hitness.club, TV channel, platform for audiovisual education and concert venue. <i>Founding member, artist, design</i></td></tr>
+<tr><td class="y">since 2024</td><td>Café Lit (cafelit.de), literature platform. <i>Co-initiator, creative producer</i></td></tr>
+<tr><td class="y">ongoing</td><td>exe.network, artists' platform and network in Leipzig. <i>Founding member</i></td></tr>
+<tr><td class="y">2022</td><td>ThinkTank “State, Structure &amp; Future of Streaming”, symposium. <i>Design, creative producer</i></td></tr>
+</table>
+
+<h4>Film and video (selection)</h4>
+<p>Meine Eisi, film about the Eisenbahnstraße Leipzig (2025, director) · documentaries: 5 Jahre ZiMMT (2025), Politik im Freien Theater (2025), sens Festival (2023, 2024), DOK Neuland at MdbK Leipzig (2023), European Creators Lab (2023) · Der Allergiker, web series (2020–2021) · music videos for Tränen, Brockhoff, Kaboros and Balcony DC</p>
+
+</div>
+  </div>
+  <div class="col"><p>Projects together: Resonanz (WERKSCHAU, Spinnerei Leipzig, 2021), Supermotte (culture.room Berlin, 2022), Metamorphose (Nikolaisaal Potsdam, with KAPmodern, 2023), Hidden Heroes (ZiMMT Leipzig, 2025), “… denn jeder ist die Welt” (Nikolaisaal Potsdam, with KAPmodern, 2026).</p></div>
+</section>
+
+<footer class="meta"><span>Drawn Realities · EMAP residency 2027</span><a href="https://wasistwert.info">wasistwert.info</a><a href="https://maximchubarov.de">maximchubarov.de</a></footer>
+</div>
+</body></html>

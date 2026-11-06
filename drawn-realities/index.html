@@ -32,7 +32,10 @@ nav { display: flex; flex-wrap: wrap; gap: 8px 22px; border-top: 1px solid var(-
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
 section { scroll-margin-top: 64px; }
 nav .marke { font-family: var(--display); font-size: 20px; text-transform: none; letter-spacing: 0; margin-right: auto; max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; transition: max-width .35s ease, opacity .35s ease; }
-nav.klein .marke { max-width: 240px; opacity: 1; }
+nav.klein .marke { max-width: 620px; opacity: 1; }
+.marke-wer { font-family: var(--label); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--graphite); opacity: .6; margin-left: 14px; transition: color .35s ease; }
+nav.dunkel .marke-wer { color: var(--paper); opacity: .45; }
+@media (max-width: 720px) { .marke-wer { display: none; } }
 nav { margin-inline: calc(50% - 50vw); padding-inline: max(28px, calc(50vw - 528px)); transition: background .35s ease, border-color .35s ease; }
 nav a { transition: color .35s ease; }
 nav.dunkel { background: var(--ink); border-color: rgba(236,241,253,.18); }
@@ -130,7 +133,7 @@ footer { border-top: 1px solid var(--line); padding-top: 18px; display: flex; fl
   <h1 id="top">Drawn Realities</h1>
   <p class="logline">Over two months, the painter Merlin Rainer and concept artist Maxim M. Chubarov work with partners on site to find out how a drawn world becomes a space for interactive storytelling.</p>
 </header>
-<nav aria-label="Sections"><a class="marke" href="#top">Drawn Realities</a><a href="#images">Works</a><a href="#project">Project</a><a href="#timeline">Timeline</a><a href="#tech">Tech rider</a><a href="#people">CVs</a><span class="progress" aria-hidden="true"></span></nav>
+<nav aria-label="Sections"><a class="marke" href="#top">Drawn Realities<span class="marke-wer">Merlin Rainer and Maxim M. Chubarov</span></a><a href="#images">Works</a><a href="#project">Project</a><a href="#timeline">Timeline</a><a href="#tech">Tech rider</a><a href="#people">CVs</a><span class="progress" aria-hidden="true"></span></nav>
 
 <figure class="hero"><img src="img/00_feldman_collage.jpg" alt="Merlin Rainer's wall drawing for the Feldman scene: Morton Feldman looks out of the collage, between sheets of Philip Guston. Nikolaisaal Potsdam, 2026." loading="lazy"><figcaption>Merlin Rainer's wall drawing for the Feldman scene: Morton Feldman looks out of the collage, between sheets of Philip Guston. Nikolaisaal Potsdam, 2026.</figcaption></figure>
 

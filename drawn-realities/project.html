@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Merlin Rainer and Maxim M. Chubarov explore how a drawn world becomes a space for interactive storytelling.">
+<title>Drawn Realities</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans+Condensed:wght@400;500&display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; }
+/* Layout: eine ruhige Mappe auf Merlins Papier, schmale Lesespalte, Bilder dürfen breiter. Bewusst nur ein Thema (Papier), Farben überall explizit. */
+:root {
+  --paper: #ecf1fd; --ink: #16171a; --graphite: #4b4f58; --line: #c9cfdc; --sheet: #f6f8fe;
+  --display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --body: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --label: "IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+html { background: var(--paper); }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 56px 96px; display: grid; gap: 72px; }
+.col { max-width: 680px; }
+header { display: grid; gap: 20px; }
+.eyebrow, h2, h4, figcaption, nav a, td.y, th, .meta { font-family: var(--label); letter-spacing: .06em; }
+.eyebrow { font-size: 13px; text-transform: uppercase; color: var(--graphite); }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 5vw, 56px); line-height: 1; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.logline { font-size: 22px; line-height: 1.45; max-width: 760px; margin: 0; text-wrap: pretty; }
+nav { display: flex; flex-wrap: wrap; gap: 8px 22px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 12px; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); margin-top: -48px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+section { scroll-margin-top: 64px; }
+nav .marke { font-family: var(--display); font-size: 20px; text-transform: none; letter-spacing: 0; margin-right: auto; max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; transition: max-width .35s ease, opacity .35s ease; }
+nav.klein .marke { max-width: 240px; opacity: 1; }
+nav { margin-inline: calc(50% - 50vw); padding-inline: max(28px, calc(50vw - 528px)); transition: background .35s ease, border-color .35s ease; }
+nav a { transition: color .35s ease; }
+nav.dunkel { background: var(--ink); border-color: rgba(236,241,253,.18); }
+nav.dunkel a { color: var(--paper); }
+nav.dunkel .progress { background: var(--paper); }
+nav { align-items: baseline; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+[hidden] { display: none !important; }
+.band { width: 100vw; margin-left: calc(50% - 50vw); background: var(--ink); color: var(--paper); padding-block: 72px 88px; }
+.band-innen { max-width: 1080px; margin: 0 auto; padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 64px; }
+.band-kopf { display: grid; gap: 10px; max-width: 640px; }
+.band h2 { color: #9aa1b2; margin: 0; }
+.band-kopf p { color: #c9cfdc; font-size: 16px; margin: 0; }
+.werk { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 2.75fr); gap: 32px; border-top: 1px solid rgba(236,241,253,.18); padding-top: 22px; }
+.werk-kopf { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 6px; position: sticky; top: 64px; }
+.werk-kopf .jahr { font-family: var(--label); font-size: 13px; letter-spacing: .14em; color: #9aa1b2; font-variant-numeric: tabular-nums; }
+.werk-kopf h3 { font-family: var(--display); font-size: 30px; line-height: 1.1; margin: 0; color: var(--paper); }
+.werk-kopf p { font-size: 15px; color: #c9cfdc; margin: 0; }
+.werk-bilder { display: grid; gap: 14px; min-width: 0; }
+.buehne { border: 0; padding: 0; background: none; cursor: zoom-in; display: flex; align-items: center; justify-content: flex-start; height: min(66vh, 620px); width: 100%; }
+.buehne img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; transition: opacity .5s cubic-bezier(.25,.1,.25,1); }
+.buehne img.aus, .lb img.aus { opacity: 0; transition: opacity .28s cubic-bezier(.4,0,.6,1); }
+.loop { margin: 28px 0 0; display: grid; gap: 8px; }
+.loop video { width: 100%; height: auto; display: block; background: #000; }
+.loop figcaption { color: #c9cfdc; font-size: 13px; }
+.werk-text { font-size: 15px; line-height: 1.5; color: var(--paper) !important; margin: 8px 0 4px !important; }
+.credits { margin: 6px 0 0; display: grid; gap: 6px; }
+.credits div { display: grid; gap: 1px; }
+.credits dt { font-family: var(--label); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #9aa1b2; }
+.credits dd { margin: 0; font-size: 14px; color: #e6e9f2; }
+.credits .doku dt, .credits .doku dd { color: #6f7689; }
+.credits .doku dd { font-size: 12.5px; }
+.werk-link { font-family: var(--label); font-size: 13px; letter-spacing: .06em; color: var(--paper); text-decoration: none; border-bottom: 1px solid rgba(236,241,253,.4); justify-self: start; margin-top: 6px; padding-bottom: 2px; }
+.werk-link:hover, .werk-link:focus-visible { border-color: var(--paper); }
+.steuer { display: flex; align-items: center; gap: 18px; font-family: var(--label); color: #c9cfdc; }
+.steuer .zahl { font-size: 13px; letter-spacing: .14em; font-variant-numeric: tabular-nums; min-width: 72px; text-align: center; }
+.pfeil { background: none; border: 1px solid rgba(236,241,253,.28); color: var(--paper); width: 40px; height: 40px; border-radius: 50%; font-size: 16px; cursor: pointer; transition: border-color .2s, background .2s; }
+.pfeil:hover, .pfeil:focus-visible { border-color: var(--paper); background: rgba(236,241,253,.08); }
+.lb { position: fixed; inset: 0; z-index: 20; background: rgba(12,13,16,.94); display: grid; grid-template-columns: 64px 1fr 64px; align-items: center;
+  padding: calc(48px + env(safe-area-inset-top,0px)) max(8px, env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(8px, env(safe-area-inset-left,0px)); }
+.lb figure { margin: 0; display: grid; gap: 10px; justify-items: center; max-height: 100%; min-height: 0; }
+.lb img { max-width: 100%; max-height: calc(100vh - 140px); object-fit: contain; transition: opacity .5s cubic-bezier(.25,.1,.25,1); }
+.lb figcaption { color: #e6e9f2; font-family: var(--label); font-size: 14px; letter-spacing: .03em; max-width: 720px; text-align: center; }
+.lb button { background: none; border: 0; color: #fff; font-family: var(--label); font-size: 28px; cursor: pointer; padding: 12px; }
+.lb .lb-x { position: absolute; top: calc(10px + env(safe-area-inset-top,0px)); right: max(12px, env(safe-area-inset-right,0px)); font-size: 14px; letter-spacing: .1em; text-transform: uppercase; }
+@media (max-width: 720px) { .werk { grid-template-columns: minmax(0, 1fr); gap: 14px; } .werk-kopf { position: static; } .buehne { height: min(76vw, 60vh); justify-content: center; } .lb { grid-template-columns: 40px 1fr 40px; } .band { padding-block: 48px 56px; } }
+@media (max-width: 960px) { .werk { grid-template-columns: minmax(0, 1fr); gap: 14px; } .werk-kopf { position: static; } }
+html, body { overflow-x: clip; }
+.progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--ink); transform-origin: left; transform: scaleX(0); }
+nav a { font-size: 14px; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+nav a:hover, nav a:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
+a { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+figure { margin: 0; display: grid; gap: 8px; }
+figure img { width: 100%; height: auto; display: block; background: var(--sheet); }
+figcaption { font-size: 13px; color: var(--graphite); max-width: 640px; }
+.im-text { margin: 18px 0 22px; }
+.im-text img { width: 100%; height: auto; display: block; }
+.hero img { max-height: 80vh; object-fit: contain; object-position: left center; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px; }
+.grid figure:first-child { grid-column: 1 / -1; }
+section { display: grid; gap: 18px; }
+h2 { font-size: 13px; text-transform: uppercase; font-weight: 500; color: var(--graphite); margin: 28px 0 0; }
+section > h2:first-child, .col > h2:first-child { margin-top: 0; }
+h3 { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1.1; margin: 0; text-wrap: balance; }
+h4 { font-size: 12px; text-transform: uppercase; font-weight: 500; color: var(--graphite); margin: 22px 0 8px; }
+p { margin: 0 0 14px; text-wrap: pretty; }
+ol, ul { margin: 0 0 14px; padding-left: 24px; } li { margin-bottom: 6px; }
+.host b, .weeks b { font-family: var(--label); font-weight: 500; font-size: 15px; letter-spacing: .03em; }
+.scroll { overflow-x: auto; background: var(--sheet); border: 1px solid var(--line); padding: 20px; }
+.scroll svg { min-width: 640px; width: 100%; height: auto; display: block; }
+table { border-collapse: collapse; width: 100%; font-size: 16px; }
+td, th { text-align: left; vertical-align: top; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); }
+th { font-size: 14px; font-weight: 500; width: 30%; }
+td.y { width: 96px; font-size: 13px; color: var(--graphite); white-space: nowrap; }
+td i, .cv i { font-style: italic; color: var(--graphite); }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 32px; }
+.cols h2 { margin-top: 0; }
+.people { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 48px; align-items: start; }
+.cv { font-size: 16px; }
+.cv table { font-size: 15px; }
+.note { font-size: 15px; color: var(--graphite); }
+.meta { font-size: 13px; color: var(--graphite); }
+footer { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+@media (max-width: 720px) {
+  body { font-size: 17px; }
+  .grid, .cols, .people { grid-template-columns: 1fr; }
+  .wrap { gap: 56px; padding-block: 32px 64px; }
+  nav { flex-wrap: nowrap; overflow-x: auto; gap: 16px; padding-inline: 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  nav::-webkit-scrollbar { display: none; }
+  nav a { white-space: nowrap; flex: none; }
+  nav .marke { display: none; }
+}
+</style>
+
+</head><body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Merlin Rainer and Maxim M. Chubarov · since 2021</div>
+  <h1 id="top">Drawn Realities</h1>
+  <p class="logline">The painter Merlin Rainer and the concept artist Maxim M. Chubarov explore how a drawn world becomes a space for interactive storytelling.</p>
+</header>
+<nav aria-label="Sections"><a class="marke" href="#top">Drawn Realities</a><a href="#images">Works</a><a href="#project">Project</a><a href="#next">Next</a><span class="progress" aria-hidden="true"></span></nav>
+
+<figure class="hero"><img src="img/00_feldman_collage.jpg" alt="Merlin Rainer's wall drawing for the Feldman scene: Morton Feldman looks out of the collage, between sheets of Philip Guston. Nikolaisaal Potsdam, 2026." loading="lazy"><figcaption>Merlin Rainer's wall drawing for the Feldman scene: Morton Feldman looks out of the collage, between sheets of Philip Guston. Nikolaisaal Potsdam, 2026.</figcaption></figure>
+
+
+<section id="images" class="band">
+  <div class="band-innen">
+    <div class="band-kopf"><h2>Works</h2><p>Selected works, newest first. Open any image to see it large. All drawings, letters and frames of “… denn jeder ist die Welt” by Merlin Rainer, drawn by hand in pencil, graphite and ink.</p></div>
+    <article class="werk" data-start="0" data-n="28">
+  <header class="werk-kopf"><span class="jahr">2026</span><h3>“… denn jeder ist die Welt”</h3><p>Nikolaisaal Potsdam · 28 October 2026</p><p class="werk-text">An evening with the ensemble KAPmodern of the Kammerakademie Potsdam. Merlin's drawings tell the friendship of Morton Feldman and Philip Guston and react live to the music and to a cellist. In the interval the audience assembles the double portrait on the wall.</p><dl class="credits"><div><dt>Concept</dt><dd>Merlin Rainer, Maxim M. Chubarov, Bettina Lange</dd></div><div><dt>Drawings and animation</dt><dd>Merlin Rainer</dd></div><div><dt>Dramaturgy, show system, mapping, light</dt><dd>Maxim M. Chubarov</dd></div><div><dt>Music</dt><dd>KAPmodern</dd></div><div class="doku"><dt>Video and photo</dt><dd>Benjamin Weber</dd></div></dl></header>
+  <div class="werk-bilder">
+    <button class="buehne" aria-label="Open “… denn jeder ist die Welt” full screen"><img src="img/m/img_kap2026_001.jpg?v=1793957071" alt="“… denn jeder ist die Welt”" loading="lazy" decoding="async"></button>
+    <div class="steuer"><button class="pfeil" data-d="-1" aria-label="Previous image">←</button><span class="zahl"><span class="k">01</span> / 28</span><button class="pfeil" data-d="1" aria-label="Next image">→</button></div>
+    <figure class="loop"><video src="video/puzzle_wand.mp4" poster="video/puzzle_wand_poster.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>In the interval the audience assembled Merlin's double portrait of Feldman and Guston on the wall, sheet by sheet.</figcaption></figure>
+  </div>
+</article><article class="werk" data-start="34" data-n="10">
+  <header class="werk-kopf"><span class="jahr">2024–2026</span><h3>Upload DDR · UP-⁠TEMPO POLITICS</h3><p>GfZK Leipzig · Leipzig Light Festival</p><p class="werk-text">Merlin's drawn film, in which phone screenshots become graphite drawings, shown as a large projection in the city centre of Leipzig. Later published on MDR and in the ARD Mediathek. His film UP-⁠TEMPO POLITICS was shown in the group exhibition “It's not about nothing. Episode 2” at GfZK Leipzig in 2026.</p><dl class="credits"><div><dt>Film and drawings</dt><dd>Merlin Rainer</dd></div><div class="doku"><dt>Photos Light Festival</dt><dd>Nicolás Rupcich</dd></div></dl><a class="werk-link" href="https://www.ardmediathek.de/video/kurzfilme-im-mdr/upload-ddr/mdr/Y3JpZDovL21kci5kZS9zZW5kdW5nLzI4MjA0MS8yMDI1MTIxNTA4MDAvZWluemVsc3R1ZWNrLW1kci1vbmxpbmUtb25seS0yNTA" target="_blank" rel="noopener">Watch the video ↗</a></header>
+  <div class="werk-bilder">
+    <button class="buehne" aria-label="Open Upload DDR · UP-⁠TEMPO POLITICS full screen"><img src="img/m/img_hq_img_uploadddr_lichtfest_01.jpg?v=1793965318" alt="Upload DDR · UP-⁠TEMPO POLITICS" loading="lazy" decoding="async"></button>
+    <div class="steuer"><button class="pfeil" data-d="-1" aria-label="Previous image">←</button><span class="zahl"><span class="k">01</span> / 10</span><button class="pfeil" data-d="1" aria-label="Next image">→</button></div>
+    
+  </div>
+</article><article class="werk" data-start="44" data-n="8">
+  <header class="werk-kopf"><span class="jahr">2025</span><h3>Hidden Heroes</h3><p>ZiMMT Leipzig</p><p class="werk-text">Merlin interviewed people from Leipzig and drew them and their projects.</p><dl class="credits"><div><dt>Drawings and concept</dt><dd>Merlin Rainer</dd></div><div class="doku"><dt>Photography</dt><dd>Nietze</dd></div></dl></header>
+  <div class="werk-bilder">
+    <button class="buehne" aria-label="Open Hidden Heroes full screen"><img src="img/m/img_hiddenheroes_hh_00.jpg?v=1793964469" alt="Hidden Heroes" loading="lazy" decoding="async"></button>
+    <div class="steuer"><button class="pfeil" data-d="-1" aria-label="Previous image">←</button><span class="zahl"><span class="k">01</span> / 08</span><button class="pfeil" data-d="1" aria-label="Next image">→</button></div>
+    
+  </div>
+</article><article class="werk" data-start="65" data-n="7">
+  <header class="werk-kopf"><span class="jahr">2023</span><h3>Metamorphose</h3><p>Nikolaisaal Potsdam</p><p class="werk-text">Images formed in real time to music by Ligeti, Scelsi, Nono, Feldman and Tenney, played by the ensemble KAPmodern.</p><dl class="credits"><div><dt>Concept</dt><dd>Maxim M. Chubarov</dd></div><div><dt>Drawings</dt><dd>Merlin Rainer</dd></div><div><dt>Music</dt><dd>KAPmodern</dd></div></dl><a class="werk-link" href="https://www.wasistwert.info/metamorphose" target="_blank" rel="noopener">Documentation ↗</a></header>
+  <div class="werk-bilder">
+    <button class="buehne" aria-label="Open Metamorphose full screen"><img src="img/m/img_hq_img_metamorphose-real.jpg?v=1793956909" alt="Metamorphose" loading="lazy" decoding="async"></button>
+    <div class="steuer"><button class="pfeil" data-d="-1" aria-label="Previous image">←</button><span class="zahl"><span class="k">01</span> / 07</span><button class="pfeil" data-d="1" aria-label="Next image">→</button></div>
+    
+  </div>
+</article><article class="werk" data-start="98" data-n="7">
+  <header class="werk-kopf"><span class="jahr">2022</span><h3>Supermotte</h3><p>culture.room Berlin</p><p class="werk-text">A live performance in which the author wrote the story on site, Merlin's paintings grew alongside the text, and projection brought both into the room.</p><dl class="credits"><div><dt>Text</dt><dd>Peter Sipos</dd></div><div><dt>Painting</dt><dd>Merlin Rainer, Anne Chpakovsi</dd></div><div><dt>Projection</dt><dd>Maxim M. Chubarov</dd></div></dl><a class="werk-link" href="https://www.youtube.com/watch?v=xZ7iHVDyxZg&t=705s" target="_blank" rel="noopener">Watch the video ↗</a></header>
+  <div class="werk-bilder">
+    <button class="buehne" aria-label="Open Supermotte full screen"><img src="img/m/img_supermotte_001.jpg?v=1793957792" alt="Supermotte" loading="lazy" decoding="async"></button>
+    <div class="steuer"><button class="pfeil" data-d="-1" aria-label="Previous image">←</button><span class="zahl"><span class="k">01</span> / 07</span><button class="pfeil" data-d="1" aria-label="Next image">→</button></div>
+    
+  </div>
+</article><article class="werk" data-start="105" data-n="6">
+  <header class="werk-kopf"><span class="jahr">2021</span><h3>Resonanz</h3><p>WERKSCHAU Spinnerei Leipzig</p><p class="werk-text">Painting, dance and music influencing each other live, developed with the collective WERT.</p><dl class="credits"><div><dt>Concept</dt><dd>Maxim M. Chubarov, Merlin Rainer</dd></div><div><dt>Painting</dt><dd>Merlin Rainer</dd></div><div><dt>Dance</dt><dd>Denis Cvetkovic</dd></div><div><dt>Music</dt><dd>Hakim Azmi</dd></div><div><dt>With</dt><dd>Collective WERT</dd></div></dl></header>
+  <div class="werk-bilder">
+    <button class="buehne" aria-label="Open Resonanz full screen"><img src="img/m/img_hq_img_resonanz_001.jpg?v=1793956912" alt="Resonanz" loading="lazy" decoding="async"></button>
+    <div class="steuer"><button class="pfeil" data-d="-1" aria-label="Previous image">←</button><span class="zahl"><span class="k">01</span> / 06</span><button class="pfeil" data-d="1" aria-label="Next image">→</button></div>
+    
+  </div>
+</article>
+  </div>
+</section>
+
+<section id="project" class="col">
+<h2>An interval in Potsdam</h2>
+<p>On 28 October 2026 we presented “… denn jeder ist die Welt” (“… for everyone is the world”) with the ensemble KAPmodern of the Kammerakademie Potsdam at the Nikolaisaal Potsdam, an evening we had developed for and with them. On every seat lay a quarter sheet, a fragment of one large drawing by Merlin, and on the wall hung a grid of squares marked with letters. In the interval people queued to bring their sheet to the matching square, and by the end of the break the wall showed a double portrait of the composer Morton Feldman and the painter Philip Guston, whose friendship the evening had told in drawings. We had not expected the queues. People had followed the story through the first half, and in the interval they put its picture together.</p>
+
+<h2>The question</h2>
+<p>One question runs through our work: how does a drawn world become a space for interactive storytelling? It leaves room for what we find in each place. We take in impressions, stories and themes on site, in conversation with hosts, dramaturgs, musicians, performers or collectives. The thread and the frame of the piece we set ourselves.</p>
+
+<h2>How we work together</h2>
+<p>Merlin Rainer is a painter who is developing towards animated film. He draws real people and places in pencil, graphite and ink. Maxim M. Chubarov shares the research and the dramaturgy with him and develops the technology that extends these drawings into a room: projection onto the architecture, light, sound, tracking, live control, or an installation that visitors walk through. The room always grows out of Merlin's drawn world. We research the material together and develop it with the people we meet on site, and in the end with the audience.</p><figure class="im-text"><img src="img/zusammenarbeit.jpg" alt="Merlin Rainer and Maxim M. Chubarov at work, Nikolaisaal Potsdam, 2026" loading="lazy"></figure>
+<p>In Potsdam every image on the wall came from Merlin's hand. We developed the story of the evening together, and Maxim worked out how the drawings would respond during the concert. A camera followed the cellist, and Merlin's drawn measuring marks moved with her. His ink waves changed with the loudness of the music, picked up by microphones. The projection was mapped across the screen and the columns of the hall, and the lighting followed the running order. We built and ran this show system ourselves, using AI as a coding tool, and adapted it during rehearsals. These moments are where our question comes from.</p>
+<p>Drawing gives us a lot of freedom. We can jump through time, place two biographies next to each other, explain what we have learned and let fantastic things happen. It also creates distance, and in our experience that distance gives people a way in, even to heavy subjects. With Feldman and Guston we chose to give an impression of their friendship and left many details out. Merlin's films show this too. In Upload DDR phone screenshots become graphite drawings. UP-⁠TEMPO POLITICS draws the Hardtekk scene from real interviews with young people who are connected by the music while holding very different political views.</p>
+<p>Whether the room is immersive or interactive, or mainly gives information, depends on the material. The audience should always find an easy way in, and usually gets something to do.</p>
+
+<h2>Where our method comes from</h2>
+<p>We met in the artist collective WERT (German for “value”), which Maxim founded and whose method he developed together with its members. For seven years the collective ran self-organised residencies, one week in one place, each year around one term that every member tested in their own field. Every year added one more step. Together the seven steps describe how artistic value is created collectively, from the first question to the presentation, and we still work along them:</p>
+<ol>
+<li>What is value? (Was ist WERT?, 2020): deciding what deserves attention in a place, and for whom.</li>
+<li>Resonance (Resonanz, 2021): turning towards each other, the place, its projects and its people. Out of this response we find the right material, images and techniques.</li>
+<li>con:sens (with sense and with the senses, 2022): designing rooms from the material that make sense and appeal to the senses, and asking how technology can do both.</li>
+<li>Synergy (Synergie, 2023): connecting people, crafts, media and techniques so that the whole becomes more than its parts.</li>
+<li>Paradigm (Paradigma, 2024): finding the pattern in the material, the thread and the form of the story.</li>
+<li>SHiFT (2025): changing the perspective, questioning the point of view and testing how the work is received.</li>
+<li>Spectrum (Spektrum, 2026): opening the work up, showing and publishing it, built so that it can continue.</li>
+</ol>
+
+<h2 id="next">What comes next</h2>
+<p>“… denn jeder ist die Welt” is our current stage. There, our story was written around a music programme that was already set, the responsive moments were single scenes, and the setup was built for one hall. Next, we want interaction to be part of the story from the first day, with local partners who shape the material with us as co-authors, and a form that can be rebuilt in other theatres, halls and galleries.</p>
+<p>We are looking for venues and partners to do this with. Get in touch via <a href="https://maximchubarov.de">maximchubarov.de</a> or <a href="https://www.merlinrainer.de">merlinrainer.de</a>.</p>
+
+
+</section>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lb-x" id="lb-x" aria-label="Close">Close ✕</button>
+  <button class="lb-p" id="lb-p" aria-label="Previous image">←</button>
+  <figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure>
+  <button class="lb-n" id="lb-n" aria-label="Next image">→</button>
+</div>
+
+<script>
+(function(){
+  var bar=document.querySelector('.progress');
+  function f(){
+    var h=document.documentElement, max=h.scrollHeight-h.clientHeight, y=h.scrollTop||document.body.scrollTop;
+    if(bar) bar.style.transform='scaleX('+(max>0?Math.min(1,y/max):0)+')';
+    var nv=document.querySelector('nav'), h1=document.getElementById('top'); if(nv&&h1) nv.classList.toggle('klein', h1.getBoundingClientRect().bottom<0); var bd=document.querySelector('.band'); if(nv&&bd){ var r=bd.getBoundingClientRect(), nh=nv.getBoundingClientRect().bottom; nv.classList.toggle('dunkel', r.top<nh && r.bottom>nh*0.5); }
+  }
+  addEventListener('scroll',f,{passive:true}); addEventListener('resize',f); f();
+  function passt(){ [].forEach.call(document.querySelectorAll('h1, h3'), function(h){ h.style.fontSize=''; var f=parseFloat(getComputedStyle(h).fontSize); while(h.scrollWidth>h.clientWidth+1 && f>16){ f-=1; h.style.fontSize=f+'px'; } }); }
+  passt(); addEventListener('resize', passt); if(document.fonts) document.fonts.ready.then(passt);
+  var ALLE=[{"src": "img/kap2026/001.jpg?v=1793957071", "mid": "img/m/img_kap2026_001.jpg?v=1793957071", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/007.jpg?v=1793957071", "mid": "img/m/img_kap2026_007.jpg?v=1793957071", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/008.jpg?v=1793957071", "mid": "img/m/img_kap2026_008.jpg?v=1793957071", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/009.jpg?v=1793957071", "mid": "img/m/img_kap2026_009.jpg?v=1793957071", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/011.jpg?v=1793957072", "mid": "img/m/img_kap2026_011.jpg?v=1793957072", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/014.jpg?v=1793957072", "mid": "img/m/img_kap2026_014.jpg?v=1793957072", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/015.jpg?v=1793957072", "mid": "img/m/img_kap2026_015.jpg?v=1793957072", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/018.jpg?v=1793957072", "mid": "img/m/img_kap2026_018.jpg?v=1793957072", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/020.jpg?v=1793957072", "mid": "img/m/img_kap2026_020.jpg?v=1793957072", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/022.jpg?v=1793957072", "mid": "img/m/img_kap2026_022.jpg?v=1793957072", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/025.jpg?v=1793957073", "mid": "img/m/img_kap2026_025.jpg?v=1793957073", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/029.jpg?v=1793957073", "mid": "img/m/img_kap2026_029.jpg?v=1793957073", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/045.jpg?v=1793957073", "mid": "img/m/img_kap2026_045.jpg?v=1793957073", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/055.jpg?v=1793957073", "mid": "img/m/img_kap2026_055.jpg?v=1793957073", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/056.jpg?v=1793957073", "mid": "img/m/img_kap2026_056.jpg?v=1793957073", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/059.jpg?v=1793957073", "mid": "img/m/img_kap2026_059.jpg?v=1793957073", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/068.jpg?v=1793957073", "mid": "img/m/img_kap2026_068.jpg?v=1793957073", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/072.jpg?v=1793957074", "mid": "img/m/img_kap2026_072.jpg?v=1793957074", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/089.jpg?v=1793957074", "mid": "img/m/img_kap2026_089.jpg?v=1793957074", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/kap2026/099.jpg?v=1793957074", "mid": "img/m/img_kap2026_099.jpg?v=1793957074", "cap": "“… denn jeder ist die Welt”, Nikolaisaal Potsdam, 28 October 2026. Still from the recording."}, {"src": "img/hq/img_00_feldman_collage.jpg?v=1793965181", "mid": "img/m/img_hq_img_00_feldman_collage.jpg?v=1793965181", "cap": "Merlin Rainer's wall drawing for the Feldman scene: Morton Feldman looks out of the collage, between sheets of Philip Guston. Nikolaisaal Potsdam, 2026."}, {"src": "img/00_feldman_merlin.jpg?v=1793964119", "mid": "img/m/img_00_feldman_merlin.jpg?v=1793964119", "cap": "Merlin Rainer hangs the next sheets of his wall drawing for the Feldman scene, while Morton Feldman looks out of the collage. Nikolaisaal Potsdam, 2026."}, {"src": "img/hq/img_00_feldman_guston_mosaic.jpg?v=1793960683", "mid": "img/m/img_hq_img_00_feldman_guston_mosaic.jpg?v=1793960683", "cap": "Merlin Rainer's wall drawing for the Feldman scene: the portraits of Philip Guston and Morton Feldman merge across the sheets. Nikolaisaal Potsdam, 2026."}, {"src": "img/01_feldman_wall_portrait_hd.jpg?v=1793954344", "mid": "img/m/img_01_feldman_wall_portrait_hd.jpg?v=1793954344", "cap": "Merlin Rainer's wall drawing for Morton Feldman, built up in front of the camera. Nikolaisaal Potsdam, 2026."}, {"src": "img/hq/img_02_feldman_wall_growing.jpg?v=1793956904", "mid": "img/m/img_hq_img_02_feldman_wall_growing.jpg?v=1793956904", "cap": "The same wall while it grows: abstract marks before the faces appear."}, {"src": "img/hq/img_03_merlin_ink_script.jpg?v=1793956904", "mid": "img/m/img_hq_img_03_merlin_ink_script.jpg?v=1793956904", "cap": "Merlin's hand-drawn ink alphabet, set as live text: “denn jeder ist die Welt”."}, {"src": "img/hq/img_04_merlin_ink_jeder_alle.jpg?v=1793956904", "mid": "img/m/img_hq_img_04_merlin_ink_jeder_alle.jpg?v=1793956904", "cap": "JEDER / ALLE: ink letters by Merlin, taken apart and rebuilt for the finale."}, {"src": "img/hq/img_05_chat_in_merlins_frame.jpg?v=1793956904", "mid": "img/m/img_hq_img_05_chat_in_merlins_frame.jpg?v=1793956904", "cap": "A conversation on the wall, written in Merlin's script inside his drawn interface."}, {"src": "img/hq/img_haynsburg_139.jpg?v=1793957126", "mid": "img/m/img_hq_img_haynsburg_139.jpg?v=1793957126", "cap": "Naturklangkapelle Haynsburg, opening 2026. Light and 3D spatial sound installation; light by Maxim M. Chubarov, sound by Felix Deufel and Philipp Rumsch, architecture Atelier ST. Photo: Nina Buttendorf."}, {"src": "img/hq/img_haynsburg_1400_sd_DSC05391.jpg?v=1793970326", "mid": "img/m/img_hq_img_haynsburg_1400_sd_DSC05391.jpg?v=1793970326", "cap": "Naturklangkapelle Haynsburg, opening 2026. Light and 3D spatial sound installation; light by Maxim M. Chubarov, sound by Felix Deufel and Philipp Rumsch, architecture Atelier ST."}, {"src": "img/haynsburg/143.jpg?v=1793957126", "mid": "img/m/img_haynsburg_143.jpg?v=1793957126", "cap": "Naturklangkapelle Haynsburg, opening 2026. Light and 3D spatial sound installation; light by Maxim M. Chubarov, sound by Felix Deufel and Philipp Rumsch, architecture Atelier ST. Photo: Nina Buttendorf."}, {"src": "img/hq/img_haynsburg_aussen.jpg?v=1793970314", "mid": "img/m/img_hq_img_haynsburg_aussen.jpg?v=1793970314", "cap": "Naturklangkapelle Haynsburg, opening 2026. Light and 3D spatial sound installation; light by Maxim M. Chubarov, sound by Felix Deufel and Philipp Rumsch, architecture Atelier ST. Photo: Nina Buttendorf."}, {"src": "img/hq/img_haynsburg_sd_DSC05404.jpg?v=1793970327", "mid": "img/m/img_hq_img_haynsburg_sd_DSC05404.jpg?v=1793970327", "cap": "Naturklangkapelle Haynsburg, opening 2026. Light and 3D spatial sound installation; light by Maxim M. Chubarov, sound by Felix Deufel and Philipp Rumsch, architecture Atelier ST."}, {"src": "img/hq/img_haynsburg_z_239.jpg?v=1793974615", "mid": "img/m/img_hq_img_haynsburg_z_239.jpg?v=1793974615", "cap": "Naturklangkapelle Haynsburg, opening 2026. Light and 3D spatial sound installation; light by Maxim M. Chubarov, sound by Felix Deufel and Philipp Rumsch, architecture Atelier ST. Photo: Nina Buttendorf."}, {"src": "img/hq/img_uploadddr_lichtfest_01.jpg?v=1793965318", "mid": "img/m/img_hq_img_uploadddr_lichtfest_01.jpg?v=1793965318", "cap": "Upload DDR by Merlin Rainer at the Leipzig Light Festival, Augustusplatz, 2024. Photo: Nicolás Rupcich."}, {"src": "img/hq/img_uploadddr_lichtfest_02.jpg?v=1793965318", "mid": "img/m/img_hq_img_uploadddr_lichtfest_02.jpg?v=1793965318", "cap": "Upload DDR by Merlin Rainer at the Leipzig Light Festival, Augustusplatz, 2024. Photo: Nicolás Rupcich."}, {"src": "img/hq/img_uploadddr_lichtfest_03.jpg?v=1793965318", "mid": "img/m/img_hq_img_uploadddr_lichtfest_03.jpg?v=1793965318", "cap": "Upload DDR by Merlin Rainer at the Leipzig Light Festival, Augustusplatz, 2024. Photo: Nicolás Rupcich."}, {"src": "img/hq/img_uploadddr_lichtfest_04.jpg?v=1793965318", "mid": "img/m/img_hq_img_uploadddr_lichtfest_04.jpg?v=1793965318", "cap": "Upload DDR by Merlin Rainer at the Leipzig Light Festival, Augustusplatz, 2024. Photo: Nicolás Rupcich."}, {"src": "img/hq/img_uploadddr_lichtfest_05.jpg?v=1793965318", "mid": "img/m/img_hq_img_uploadddr_lichtfest_05.jpg?v=1793965318", "cap": "Upload DDR by Merlin Rainer at the Leipzig Light Festival, Augustusplatz, 2024. Photo: Nicolás Rupcich."}, {"src": "img/uptempo/01.jpg?v=1794049089", "mid": "img/m/img_uptempo_01.jpg?v=1794049089", "cap": "UP-⁠TEMPO POLITICS by Merlin Rainer in the group exhibition “It's not about nothing. Episode 2”, GfZK Leipzig, 2026."}, {"src": "img/uptempo/02.jpg?v=1794049090", "mid": "img/m/img_uptempo_02.jpg?v=1794049090", "cap": "UP-⁠TEMPO POLITICS by Merlin Rainer in the group exhibition “It's not about nothing. Episode 2”, GfZK Leipzig, 2026."}, {"src": "img/uptempo/03.jpg?v=1794049091", "mid": "img/m/img_uptempo_03.jpg?v=1794049091", "cap": "UP-⁠TEMPO POLITICS by Merlin Rainer in the group exhibition “It's not about nothing. Episode 2”, GfZK Leipzig, 2026."}, {"src": "img/uptempo/04.jpg?v=1794049092", "mid": "img/m/img_uptempo_04.jpg?v=1794049092", "cap": "UP-⁠TEMPO POLITICS by Merlin Rainer in the group exhibition “It's not about nothing. Episode 2”, GfZK Leipzig, 2026."}, {"src": "img/uptempo/05.jpg?v=1794049092", "mid": "img/m/img_uptempo_05.jpg?v=1794049092", "cap": "UP-⁠TEMPO POLITICS by Merlin Rainer in the group exhibition “It's not about nothing. Episode 2”, GfZK Leipzig, 2026."}, {"src": "img/hiddenheroes/hh_00.jpg?v=1793964469", "mid": "img/m/img_hiddenheroes_hh_00.jpg?v=1793964469", "cap": "Hidden Heroes, ZiMMT Leipzig, 2025: Merlin Rainer interviewed people and drew them and their projects."}, {"src": "img/hq/img_hiddenheroes_hh_01.jpg?v=1793964816", "mid": "img/m/img_hq_img_hiddenheroes_hh_01.jpg?v=1793964816", "cap": "Hidden Heroes, ZiMMT Leipzig, 2025: Merlin Rainer interviewed people and drew them and their projects."}, {"src": "img/hq/img_hiddenheroes_hh_03b.jpg?v=1793964816", "mid": "img/m/img_hq_img_hiddenheroes_hh_03b.jpg?v=1793964816", "cap": "Hidden Heroes, ZiMMT Leipzig, 2025: Merlin Rainer interviewed people and drew them and their projects."}, {"src": "img/hq/img_hiddenheroes_hh_06.jpg?v=1793964817", "mid": "img/m/img_hq_img_hiddenheroes_hh_06.jpg?v=1793964817", "cap": "Hidden Heroes, ZiMMT Leipzig, 2025: Merlin Rainer interviewed people and drew them and their projects."}, {"src": "img/hiddenheroes/v002.jpg?v=1793964792", "mid": "img/m/img_hiddenheroes_v002.jpg?v=1793964792", "cap": "Hidden Heroes, ZiMMT Leipzig, 2025: Merlin Rainer interviewed people and drew them and their projects."}, {"src": "img/hiddenheroes/v018.jpg?v=1793964792", "mid": "img/m/img_hiddenheroes_v018.jpg?v=1793964792", "cap": "Hidden Heroes, ZiMMT Leipzig, 2025: Merlin Rainer interviewed people and drew them and their projects."}, {"src": "img/hiddenheroes/v038.jpg?v=1793964792", "mid": "img/m/img_hiddenheroes_v038.jpg?v=1793964792", "cap": "Hidden Heroes, ZiMMT Leipzig, 2025: Merlin Rainer interviewed people and drew them and their projects."}, {"src": "img/hiddenheroes/v064.jpg?v=1793964792", "mid": "img/m/img_hiddenheroes_v064.jpg?v=1793964792", "cap": "Hidden Heroes, ZiMMT Leipzig, 2025: Merlin Rainer interviewed people and drew them and their projects."}, {"src": "img/hq/img_teleskop-103.jpg?v=1793956906", "mid": "img/m/img_hq_img_teleskop-103.jpg?v=1793956906", "cap": "TELESKOPradius, UT Connewitz Leipzig, 2025: music by Philipp Rumsch with the GewandhausChor, interactive visuals and stage design by Maxim M. Chubarov. Photo: Nikolas Fabian Kammerer."}, {"src": "img/hq/img_teleskop-240.jpg?v=1793956906", "mid": "img/m/img_hq_img_teleskop-240.jpg?v=1793956906", "cap": "TELESKOPradius, UT Connewitz Leipzig, 2025: music by Philipp Rumsch with the GewandhausChor, interactive visuals and stage design by Maxim M. Chubarov. Photo: Nikolas Fabian Kammerer."}, {"src": "img/hq/img_teleskop-344.jpg?v=1793956907", "mid": "img/m/img_hq_img_teleskop-344.jpg?v=1793956907", "cap": "TELESKOPradius, UT Connewitz Leipzig, 2025: music by Philipp Rumsch with the GewandhausChor, interactive visuals and stage design by Maxim M. Chubarov. Photo: Nikolas Fabian Kammerer."}, {"src": "img/fragmente/041.jpg?v=1793970027", "mid": "img/m/img_fragmente_041.jpg?v=1793970027", "cap": "Fragmente, WERT cycle PARADIGMA, 2024: 15 screens, each played by its own projector."}, {"src": "img/fragmente/042.jpg?v=1793957076", "mid": "img/m/img_fragmente_042.jpg?v=1793957076", "cap": "Fragmente, WERT cycle PARADIGMA, 2024: 15 screens, each played by its own projector."}, {"src": "img/hq/img_fragmente-real.jpg?v=1793956907", "mid": "img/m/img_hq_img_fragmente-real.jpg?v=1793956907", "cap": "Fragmente, WERT cycle PARADIGMA, 2024: 15 screens, each played by its own projector."}, {"src": "img/hq/img_fragmente-showcase.jpg?v=1793956907", "mid": "img/m/img_hq_img_fragmente-showcase.jpg?v=1793956907", "cap": "Fragmente, WERT cycle PARADIGMA, 2024: 15 screens, each played by its own projector."}, {"src": "img/hq/img_fragmente-alt1.jpg?v=1793956907", "mid": "img/m/img_hq_img_fragmente-alt1.jpg?v=1793956907", "cap": "Fragmente, WERT cycle PARADIGMA, 2024: 15 screens, each played by its own projector."}, {"src": "img/hq/img_fragmente-alt2.jpg?v=1793956907", "mid": "img/m/img_hq_img_fragmente-alt2.jpg?v=1793956907", "cap": "Fragmente, WERT cycle PARADIGMA, 2024: 15 screens, each played by its own projector."}, {"src": "img/fragmente/005.jpg?v=1793957074", "mid": "img/m/img_fragmente_005.jpg?v=1793957074", "cap": "Fragmente, WERT cycle PARADIGMA, 2024: 15 screens, each played by its own projector."}, {"src": "img/fragmente/024.jpg?v=1793957075", "mid": "img/m/img_fragmente_024.jpg?v=1793957075", "cap": "Fragmente, WERT cycle PARADIGMA, 2024: 15 screens, each played by its own projector."}, {"src": "img/fragmente/031.jpg?v=1793957075", "mid": "img/m/img_fragmente_031.jpg?v=1793957075", "cap": "Fragmente, WERT cycle PARADIGMA, 2024: 15 screens, each played by its own projector."}, {"src": "img/hq/img_imagetrash_imagetrash-1.jpg?v=1793966210", "mid": "img/m/img_hq_img_imagetrash_imagetrash-1.jpg?v=1793966210", "cap": "Image Trash, Galerie KUB Leipzig, 2023."}, {"src": "img/hq/img_metamorphose-real.jpg?v=1793956909", "mid": "img/m/img_hq_img_metamorphose-real.jpg?v=1793956909", "cap": "Metamorphose, Nikolaisaal Potsdam, 2023, with Merlin Rainer and KAPmodern."}, {"src": "img/hq/img_metamorphose-alt1.jpg?v=1793956909", "mid": "img/m/img_hq_img_metamorphose-alt1.jpg?v=1793956909", "cap": "Metamorphose, Nikolaisaal Potsdam, 2023, with Merlin Rainer and KAPmodern."}, {"src": "img/hq/img_metamorphose-alt2.jpg?v=1793956909", "mid": "img/m/img_hq_img_metamorphose-alt2.jpg?v=1793956909", "cap": "Metamorphose, Nikolaisaal Potsdam, 2023, with Merlin Rainer and KAPmodern."}, {"src": "img/hq/img_metamorphose_002.jpg?v=1793957093", "mid": "img/m/img_hq_img_metamorphose_002.jpg?v=1793957093", "cap": "Metamorphose, Nikolaisaal Potsdam, 2023, with Merlin Rainer and KAPmodern."}, {"src": "img/hq/img_metamorphose_006.jpg?v=1793957093", "mid": "img/m/img_hq_img_metamorphose_006.jpg?v=1793957093", "cap": "Metamorphose, Nikolaisaal Potsdam, 2023, with Merlin Rainer and KAPmodern."}, {"src": "img/hq/img_metamorphose_007.jpg?v=1793957093", "mid": "img/m/img_hq_img_metamorphose_007.jpg?v=1793957093", "cap": "Metamorphose, Nikolaisaal Potsdam, 2023, with Merlin Rainer and KAPmodern."}, {"src": "img/hq/img_metamorphose_008.jpg?v=1793957093", "mid": "img/m/img_hq_img_metamorphose_008.jpg?v=1793957093", "cap": "Metamorphose, Nikolaisaal Potsdam, 2023, with Merlin Rainer and KAPmodern."}, {"src": "img/hq/img_mindcanvas-real2.jpg?v=1793956910", "mid": "img/m/img_hq_img_mindcanvas-real2.jpg?v=1793956910", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/hq/img_mindcanvas-real.jpg?v=1793956910", "mid": "img/m/img_hq_img_mindcanvas-real.jpg?v=1793956910", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_01.jpg?v=1793957886", "mid": "img/m/img_mindcanvas_web_01.jpg?v=1793957886", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_02.jpg?v=1793957886", "mid": "img/m/img_mindcanvas_web_02.jpg?v=1793957886", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_03.jpg?v=1793957886", "mid": "img/m/img_mindcanvas_web_03.jpg?v=1793957886", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_04.jpg?v=1793957887", "mid": "img/m/img_mindcanvas_web_04.jpg?v=1793957887", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_05.jpg?v=1793957887", "mid": "img/m/img_mindcanvas_web_05.jpg?v=1793957887", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_06.jpg?v=1793957887", "mid": "img/m/img_mindcanvas_web_06.jpg?v=1793957887", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_07.jpg?v=1793957887", "mid": "img/m/img_mindcanvas_web_07.jpg?v=1793957887", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_08.jpg?v=1793957888", "mid": "img/m/img_mindcanvas_web_08.jpg?v=1793957888", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_09.jpg?v=1793957888", "mid": "img/m/img_mindcanvas_web_09.jpg?v=1793957888", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_10.jpg?v=1793957888", "mid": "img/m/img_mindcanvas_web_10.jpg?v=1793957888", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_11.jpg?v=1793957888", "mid": "img/m/img_mindcanvas_web_11.jpg?v=1793957888", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_12.jpg?v=1793957889", "mid": "img/m/img_mindcanvas_web_12.jpg?v=1793957889", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/mindcanvas/web_13.jpg?v=1793957889", "mid": "img/m/img_mindcanvas_web_13.jpg?v=1793957889", "cap": "MindCanvas, WERT cycle con:sens, 2022: immersive 360-degree projection that visitors act on."}, {"src": "img/hq/img_sphaeren-real.jpg?v=1793956910", "mid": "img/m/img_hq_img_sphaeren-real.jpg?v=1793956910", "cap": "Sphären, WERT cycle con:sens, 2022: 36 inflatable balls, three metres in diameter, in public space in Leipzig."}, {"src": "img/hq/img_sphaeren-alt1.jpg?v=1793956911", "mid": "img/m/img_hq_img_sphaeren-alt1.jpg?v=1793956911", "cap": "Sphären, WERT cycle con:sens, 2022: 36 inflatable balls, three metres in diameter, in public space in Leipzig."}, {"src": "img/hq/img_sphaeren-alt2.jpg?v=1793956911", "mid": "img/m/img_hq_img_sphaeren-alt2.jpg?v=1793956911", "cap": "Sphären, WERT cycle con:sens, 2022: 36 inflatable balls, three metres in diameter, in public space in Leipzig."}, {"src": "img/sphaeren/03.jpg?v=1793984142", "mid": "img/m/img_sphaeren_03.jpg?v=1793984142", "cap": "Sphären, WERT cycle con:sens, 2022: 36 inflatable balls, three metres in diameter, in public space in Leipzig."}, {"src": "img/sphaeren/04.jpg?v=1793984143", "mid": "img/m/img_sphaeren_04.jpg?v=1793984143", "cap": "Sphären, WERT cycle con:sens, 2022: 36 inflatable balls, three metres in diameter, in public space in Leipzig."}, {"src": "img/sphaeren/05.jpg?v=1793984143", "mid": "img/m/img_sphaeren_05.jpg?v=1793984143", "cap": "Sphären, WERT cycle con:sens, 2022: 36 inflatable balls, three metres in diameter, in public space in Leipzig."}, {"src": "img/hq/img_sphaeren_06.jpg?v=1793984161", "mid": "img/m/img_hq_img_sphaeren_06.jpg?v=1793984161", "cap": "Sphären, WERT cycle con:sens, 2022: 36 inflatable balls, three metres in diameter, in public space in Leipzig."}, {"src": "img/hq/img_sphaeren_08.jpg?v=1793984161", "mid": "img/m/img_hq_img_sphaeren_08.jpg?v=1793984161", "cap": "Sphären, WERT cycle con:sens, 2022: 36 inflatable balls, three metres in diameter, in public space in Leipzig."}, {"src": "img/hq/img_sphaeren_09.jpg?v=1793984161", "mid": "img/m/img_hq_img_sphaeren_09.jpg?v=1793984161", "cap": "Sphären, WERT cycle con:sens, 2022: 36 inflatable balls, three metres in diameter, in public space in Leipzig."}, {"src": "img/hq/img_sphaeren_10.jpg?v=1793984161", "mid": "img/m/img_hq_img_sphaeren_10.jpg?v=1793984161", "cap": "Sphären, WERT cycle con:sens, 2022: 36 inflatable balls, three metres in diameter, in public space in Leipzig."}, {"src": "img/sphaeren/11.jpg?v=1793984143", "mid": "img/m/img_sphaeren_11.jpg?v=1793984143", "cap": "Sphären, WERT cycle con:sens, 2022: 36 inflatable balls, three metres in diameter, in public space in Leipzig."}, {"src": "img/supermotte/001.jpg?v=1793957792", "mid": "img/m/img_supermotte_001.jpg?v=1793957792", "cap": "Supermotte, culture.room Berlin, 2022: live performance with painting by Merlin Rainer, text by Peter Sipos and mapping by Maxim M. Chubarov. Still from the recording."}, {"src": "img/supermotte/002.jpg?v=1793957802", "mid": "img/m/img_supermotte_002.jpg?v=1793957802", "cap": "Supermotte, culture.room Berlin, 2022: live performance with painting by Merlin Rainer, text by Peter Sipos and mapping by Maxim M. Chubarov. Still from the recording."}, {"src": "img/supermotte/015.jpg?v=1793957815", "mid": "img/m/img_supermotte_015.jpg?v=1793957815", "cap": "Supermotte, culture.room Berlin, 2022: live performance with painting by Merlin Rainer, text by Peter Sipos and mapping by Maxim M. Chubarov. Still from the recording."}, {"src": "img/supermotte/019.jpg?v=1793957827", "mid": "img/m/img_supermotte_019.jpg?v=1793957827", "cap": "Supermotte, culture.room Berlin, 2022: live performance with painting by Merlin Rainer, text by Peter Sipos and mapping by Maxim M. Chubarov. Still from the recording."}, {"src": "img/supermotte/031.jpg?v=1793957840", "mid": "img/m/img_supermotte_031.jpg?v=1793957840", "cap": "Supermotte, culture.room Berlin, 2022: live performance with painting by Merlin Rainer, text by Peter Sipos and mapping by Maxim M. Chubarov. Still from the recording."}, {"src": "img/supermotte/034.jpg?v=1793957855", "mid": "img/m/img_supermotte_034.jpg?v=1793957855", "cap": "Supermotte, culture.room Berlin, 2022: live performance with painting by Merlin Rainer, text by Peter Sipos and mapping by Maxim M. Chubarov. Still from the recording."}, {"src": "img/supermotte/035.jpg?v=1793957866", "mid": "img/m/img_supermotte_035.jpg?v=1793957866", "cap": "Supermotte, culture.room Berlin, 2022: live performance with painting by Merlin Rainer, text by Peter Sipos and mapping by Maxim M. Chubarov. Still from the recording."}, {"src": "img/hq/img_resonanz_001.jpg?v=1793956912", "mid": "img/m/img_hq_img_resonanz_001.jpg?v=1793956912", "cap": "Resonanz, WERKSCHAU Spinnerei Leipzig, 2021, with Merlin Rainer: painting, dance and music."}, {"src": "img/hq/img_resonanz_002.jpg?v=1793956912", "mid": "img/m/img_hq_img_resonanz_002.jpg?v=1793956912", "cap": "Resonanz, WERKSCHAU Spinnerei Leipzig, 2021, with Merlin Rainer: painting, dance and music."}, {"src": "img/hq/img_resonanz_003.jpg?v=1793956913", "mid": "img/m/img_hq_img_resonanz_003.jpg?v=1793956913", "cap": "Resonanz, WERKSCHAU Spinnerei Leipzig, 2021, with Merlin Rainer: painting, dance and music."}, {"src": "img/hq/img_resonanz_004.jpg?v=1793956913", "mid": "img/m/img_hq_img_resonanz_004.jpg?v=1793956913", "cap": "Resonanz, WERKSCHAU Spinnerei Leipzig, 2021, with Merlin Rainer: painting, dance and music."}, {"src": "img/hq/img_resonanz_005.jpg?v=1793956913", "mid": "img/m/img_hq_img_resonanz_005.jpg?v=1793956913", "cap": "Resonanz, WERKSCHAU Spinnerei Leipzig, 2021, with Merlin Rainer: painting, dance and music."}, {"src": "img/hq/img_resonanz_006.jpg?v=1793956913", "mid": "img/m/img_hq_img_resonanz_006.jpg?v=1793956913", "cap": "Resonanz, WERKSCHAU Spinnerei Leipzig, 2021, with Merlin Rainer: painting, dance and music."}], lb=document.getElementById('lb'), im=document.getElementById('lb-img'), cap=document.getElementById('lb-cap'), lw=null, last=null;
+  function pad(n){ return (n<10?'0':'')+n; }
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function blende(el, src, alt, leise){ el._ziel=src; var neu=new Image(); neu.src=src;
+    var bereit=(neu.decode ? neu.decode() : Promise.resolve()).catch(function(){});
+    if(leise || still || !el.offsetWidth){ bereit.then(function(){ if(el._ziel===src){ el.src=src; el.alt=alt; } }); return; }
+    el.classList.add('aus'); var dunkel=new Promise(function(r){ setTimeout(r, 400); });
+    Promise.all([bereit, dunkel]).then(function(){ if(el._ziel!==src) return; el.src=src; el.alt=alt;
+      (el.decode ? el.decode() : Promise.resolve()).catch(function(){}).then(function(){ if(el._ziel===src) requestAnimationFrame(function(){ el.classList.remove('aus'); }); }); }); }
+  [].forEach.call(document.querySelectorAll('.werk'), function(w){
+    var s=+w.dataset.start, n=+w.dataset.n, k=0, img=w.querySelector('.buehne img'), z=w.querySelector('.zahl .k');
+    w.zeige=function(j){ k=(j+n)%n; var b=ALLE[s+k]; blende(img, b.mid, b.cap);
+      if(z) z.textContent=pad(k+1); var v=ALLE[s+(k+1)%n]; if(v) new Image().src=v.mid; };
+    w.k=function(){ return k; }; w.s=s; w.n=n;
+    [].forEach.call(w.querySelectorAll('.pfeil'), function(b){ b.onclick=function(){ w.zeige(k+(+b.dataset.d)); }; });
+    w.querySelector('.buehne').onclick=function(){ open(w); };
+    var x0=null; w.querySelector('.buehne').addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; },{passive:true});
+    w.querySelector('.buehne').addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40){ e.preventDefault(); w.zeige(k+(dx<0?1:-1)); } x0=null; });
+  });
+  function show(neu){ var b=ALLE[lw.s+lw.k()]; if(neu){ im.classList.remove('aus'); im._ziel=b.mid; im.src=b.mid; im.alt=b.cap; } blende(im, b.src, b.cap, neu); cap.textContent=b.cap+'  ·  '+pad(lw.k()+1)+' / '+pad(lw.n); }
+  function open(w){ lw=w; last=document.activeElement; show(1); lb.hidden=false; document.body.style.overflow='hidden'; document.getElementById('lb-x').focus(); }
+  function close(){ lb.hidden=true; document.body.style.overflow=''; if(last) last.focus(); }
+  function step(d){ lw.zeige(lw.k()+d); show(); }
+  document.getElementById('lb-x').onclick=close;
+  document.getElementById('lb-p').onclick=function(){ step(-1); };
+  document.getElementById('lb-n').onclick=function(){ step(1); };
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  addEventListener('keydown',function(e){ if(lb.hidden) return; if(e.key==='Escape') close(); if(e.key==='ArrowRight') step(1); if(e.key==='ArrowLeft') step(-1); });
+  var y0=null; lb.addEventListener('touchstart',function(e){ y0=e.touches[0].clientX; },{passive:true});
+  lb.addEventListener('touchend',function(e){ if(y0===null) return; var dx=e.changedTouches[0].clientX-y0; if(Math.abs(dx)>40) step(dx<0?1:-1); y0=null; });
+})();
+</script>
+<footer class="meta"><span>Drawn Realities · Merlin Rainer and Maxim M. Chubarov</span><a href="https://wasistwert.info">wasistwert.info</a><a href="https://maximchubarov.de">maximchubarov.de</a><a href="https://www.merlinrainer.de">merlinrainer.de</a></footer>
+</div>
+</body></html>
